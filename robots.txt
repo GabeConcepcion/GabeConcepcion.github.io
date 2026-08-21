@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gabeconcepcion.github.io/sitemap.xml

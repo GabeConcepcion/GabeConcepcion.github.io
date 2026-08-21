@@ -1,43 +1,459 @@
-Gabe Concepcion | Threat Hunting & Detection Engineering
-  
-  
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabe Concepcion | IT Support & Security Analyst Portfolio</title>
+  <meta name="description" content="Portfolio of Gabe Concepcion showcasing IT support fundamentals, Active Directory, Windows systems troubleshooting, threat hunting, and Azure Sentinel telemetry analysis.">
+  <meta name="author" content="Gabe Concepcion">
+  <link rel="canonical" href="https://gabeconcepcion.github.io/">
 
+  <!-- OpenGraph / Social Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gabeconcepcion.github.io/">
+  <meta property="og:title" content="Gabe Concepcion | IT Support & Security Analyst">
+  <meta property="og:description" content="Technical portfolio covering IT systems administration, troubleshooting, Azure telemetry, and hands-on threat hunting reports.">
 
-  
+  <!-- Schema.org JSON-LD for Google Search & Recruiter Indexing -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gabe Concepcion",
+    "url": "https://gabeconcepcion.github.io/",
+    "sameAs": [
+      "https://github.com/GabeConcepcion"
+    ],
+    "jobTitle": "IT Support Specialist / Security Analyst",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Western Governors University"
+    },
+    "knowsAbout": [
+      "IT Support",
+      "Help Desk Administration",
+      "Windows Troubleshooting",
+      "Active Directory & Entra ID",
+      "Networking (DNS, DHCP, TCP/IP, RDP)",
+      "Microsoft Sentinel",
+      "Kusto Query Language (KQL)",
+      "Threat Hunting",
+      "Sysmon & Event Logs"
+    ],
+    "description": "IT and Cybersecurity professional experienced in Windows administration, endpoint troubleshooting, network services, and threat detection engineering."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 26, 43, 0.7);
+      --card-hover: rgba(28, 39, 64, 0.85);
+      --border: rgba(56, 75, 112, 0.35);
+      --border-hover: rgba(88, 166, 255, 0.6);
+      --text: #94a3b8;
+      --text-bright: #f8fafc;
+      --accent: #38bdf8;
+      --accent-dim: rgba(56, 189, 248, 0.12);
+      --tag-bg: #1e293b;
+      --tag-text: #cbd5e1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+      padding: 4rem 1.5rem;
+      min-height: 100vh;
+    }
+    .container { max-width: 840px; margin: 0 auto; }
     
-      Gabe Concepcion
-      Threat Hunting • Detection Engineering • SIEM Analytics
-      Documenting practical cyber defense operations, telemetry pipelines, and adversary emulation.
-      
-        GitHub Profile
-      
+    header { 
+      margin-bottom: 3rem; 
+      border-bottom: 1px solid var(--border); 
+      padding-bottom: 2rem; 
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #22c55e;
+    }
+    h1 { 
+      color: var(--text-bright); 
+      font-size: 2.4rem; 
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem; 
+    }
+    .subtitle { 
+      font-size: 1.1rem;
+      color: #cbd5e1; 
+      font-weight: 400; 
+      margin-bottom: 1rem; 
+    }
+    header p {
+      font-size: 0.975rem;
+      color: var(--text);
+      max-width: 680px;
+    }
+    .links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .links a { 
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-bright); 
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      text-decoration: none; 
+      font-size: 0.85rem; 
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .links a:hover { 
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
     
-
-    Featured Investigations & Labs
+    h2 { 
+      color: var(--text-bright); 
+      font-size: 1.15rem; 
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600; 
+      margin: 3rem 0 1.25rem; 
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    h2::before {
+      content: '//';
+      color: var(--accent);
+      font-family: 'Fira Code', monospace;
+    }
     
+    .grid { display: flex; flex-direction: column; gap: 1.25rem; }
+    .card {
+      display: block;
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card:hover { 
+      border-color: var(--border-hover); 
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    .card-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-start; 
+      margin-bottom: 0.6rem; 
+      gap: 1rem;
+    }
+    .card-title { 
+      color: var(--text-bright); 
+      font-weight: 600; 
+      font-size: 1.1rem; 
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-title .arrow {
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.2s ease;
+    }
+    .card:hover .card-title .arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .badge {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      white-space: nowrap;
+    }
+    .badge.mitre {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .card p { 
+      font-size: 0.9rem; 
+      color: var(--text); 
+      margin-bottom: 1.1rem; 
+      line-height: 1.55;
+    }
+    .tags { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+    .tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .loading-state {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--tag-text);
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .skill-title {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-family: 'Fira Code', monospace;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="status-badge">
+        <span class="status-dot"></span> Open to IT Support & Security Roles
+      </div>
+      <h1>Gabe Concepcion</h1>
+      <div class="subtitle">IT Support Specialist • Detection Engineering • Threat Hunting</div>
+      <p>Technical professional with strong foundations in Windows OS administration, network protocol diagnostics, Active Directory, and hypothesis-driven threat detection.</p>
       
-        
-          Azure Sentinel / Honeypot Deployment & Telemetry
-          Completed
-        
-        Live-fire honeypot VM deployed in Azure to capture raw adversary authentication attempts, geographic brute-force patterns, and map live telemetry via Microsoft Sentinel.
-        
-          Azure
-          Sentinel SIEM
-          KQL
-          Threat Intelligence
-        
-      
+      <div class="links">
+        <a href="https://github.com/GabeConcepcion" target="_blank" rel="noopener">GitHub Profile ↗</a>
+        <a href="https://github.com/GabeConcepcion/Threat-Hunting-Reports" target="_blank" rel="noopener">Threat Hunting Repo ↗</a>
+        <a href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">Honeypot Project ↗</a>
+      </div>
+    </header>
 
-      
+    <!-- SECTION 1: CERTIFICATIONS & EDUCATION -->
+    <h2>Education & Certifications</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Education</div>
+        <p style="font-size: 0.95rem; color: var(--text-bright); font-weight: 500; margin-top: 0.35rem;">
+          Bachelor of Science in Software Engineering
+        </p>
+        <p style="font-size: 0.85rem; color: var(--text); margin-top: 0.2rem;">
+          Western Governors University • Graduated April 2026
+        </p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-title">Certifications</div>
+        <div class="tags" style="margin-top: 0.5rem;">
+          <span class="tag">CompTIA Security+ (WIP)</span>
+          <span class="tag">CompTIA A+</span>
+          <span class="tag">AWS Cloud Practitioner</span>
+          <span class="tag">ITIL 4</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: CORE TECHNICAL COMPETENCIES -->
+    <h2>Technical Competencies & Systems</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Systems & Administration</div>
+        <div class="tags">
+          <span class="tag">Windows 10/11</span>
+          <span class="tag">Windows Server</span>
+          <span class="tag">Active Directory</span>
+          <span class="tag">Entra ID (Azure AD)</span>
+          <span class="tag">PowerShell</span>
+          <span class="tag">Event Viewer</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Networking & Protocols</div>
+        <div class="tags">
+          <span class="tag">TCP/IP & DNS</span>
+          <span class="tag">DHCP</span>
+          <span class="tag">RDP Protocol</span>
+          <span class="tag">Firewall Rules</span>
+          <span class="tag">Packet Inspection</span>
+          <span class="tag">Port Diagnostics</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Security & Telemetry</div>
+        <div class="tags">
+          <span class="tag">Microsoft Sentinel</span>
+          <span class="tag">KQL / SPL</span>
+          <span class="tag">Sysmon</span>
+          <span class="tag">MITRE ATT&CK</span>
+          <span class="tag">Threat Hunting</span>
+          <span class="tag">Incident Triage</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: HANDS-ON INFRASTRUCTURE -->
+    <h2>Infrastructure & Systems Labs</h2>
+    <div class="grid">
+      <a class="card" href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">
+        <div class="card-header">
+          <span class="card-title">Cloud Honeypot Deployment & Log Ingestion <span class="arrow">→</span></span>
+          <span class="badge">Completed</span>
+        </div>
+        <p>Configured an exposed Windows VM environment in Azure, managing network security group (NSG) rules to ingest raw authentication failure logs (Event ID 4625) into Log Analytics and build analytical query dashboards in Microsoft Sentinel.</p>
+        <div class="tags">
+          <span class="tag">Azure Virtual Machines</span>
+          <span class="tag">Network Security Groups</span>
+          <span class="tag">Log Analytics Workspace</span>
+          <span class="tag">KQL</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- SECTION 4: DYNAMIC INVESTIGATIONS & REPORTS -->
+    <h2>Technical Reports & Investigations</h2>
+    <div id="dynamic-hunts" class="grid">
+      <div class="loading-state">
+        [+] Querying GitHub API for latest technical investigations...
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadRepoReports() {
+      const container = document.getElementById('dynamic-hunts');
+      const repoUser = 'GabeConcepcion';
+      const repoName = 'Threat-Hunting-Reports';
+
+      const reportMetadata = {
+        'Dissecting-RDP-Compromise.md': {
+          title: 'Dissecting RDP Compromise & Lateral Movement',
+          technique: 'T1021.001',
+          description: 'Analysis of external RDP exposure, network authentication diagnostics, and session traversal using Windows Security Event IDs 4624/4625 (Logon Type 10) and client connection logs.',
+          tags: ['Remote Desktop (RDP)', 'Windows Event 4624 Type 10', 'Lateral Movement', 'KQL']
+        },
+        'Finance-User-Breach.md': {
+          title: 'Finance Department Targeted User Compromise',
+          technique: 'T1566 / T1078',
+          description: 'Troubleshooting and forensic investigation of an identity breach involving phishing, anomalous account sign-ins, and permission auditing in enterprise identity environments.',
+          tags: ['Active Directory / Entra ID', 'Phishing Analysis', 'Account Permissions', 'Log Analysis']
+        }
+      };
+
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents`);
+        if (!res.ok) throw new Error('API fetch failed');
         
-          Threat Hunting & Adversary Emulation Reports
-          Active Research
-        
-        Hypothesis-driven hunts mapping adversary tactics across MITRE ATT&CK, focusing on post-exploitation telemetry, persistence, and detection rule validation.
-        
-          MITRE ATT&CK
-          Endpoint Telemetry
-          KQL/SPL
-          Log Analysis
+        const items = await res.json();
+
+        const reports = items.filter(item => 
+          item.type === 'dir' || 
+          (item.name.endsWith('.md') && !['README.md', 'LICENSE', 'CONTRIBUTING.md'].includes(item.name))
+        );
+
+        if (reports.length === 0) {
+          container.innerHTML = `
+            <a class="card" href="https://github.com/${repoUser}/${repoName}" target="_blank" rel="noopener">
+              <div class="card-header">
+                <span class="card-title">Technical Reports Directory <span class="arrow">→</span></span>
+                <span class="badge mitre">Repository Index</span>
+              </div>
+              <p>Explore the full repository of technical writeups, telemetry analyses, and detection scripts.</p>
+            </a>`;
+          return;
+        }
+
+        container.innerHTML = reports.map(report => {
+          const meta = reportMetadata[report.name] || {
+            title: report.name.replace(/[-_]/g, ' ').replace('.md', ''),
+            technique: report.type === 'dir' ? 'Investigation' : 'Report',
+            description: 'Technical report and system telemetry diagnostics hosted on GitHub.',
+            tags: ['Diagnostics', 'Windows Logs', 'Detection Logic']
+          };
+
+          const tagElements = meta.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+
+          return `
+            <a class="card" href="${report.html_url}" target="_blank" rel="noopener">
+              <div class="card-header">
+                <span class="card-title">${meta.title} <span class="arrow">→</span></span>
+                <span class="badge mitre">${meta.technique}</span>
+              </div>
+              <p>${meta.description}</p>
+              <div class="tags">
+                ${tagElements}
+              </div>
+            </a>
+          `;
+        }).join('');
+
+      } catch (err) {
+        container.innerHTML = `
+          <a class="card" href="https://github.com/${repoUser}/${repoName}" target="_blank" rel="noopener">
+            <div class="card-header">
+              <span class="card-title">Technical Reports Repository <span class="arrow">→</span></span>
+              <span class="badge mitre">GitHub</span>
+            </div>
+            <p>Access the complete directory of investigations, queries, and system reports directly.</p>
+          </a>`;
+      }
+    }
+
+    loadRepoReports();
+  </script>
+</body>
+</html>

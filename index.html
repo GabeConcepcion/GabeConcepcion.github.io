@@ -15,7 +15,7 @@
   <!-- OpenGraph / Social Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gabeconcepcion.com/">
-  <meta property="og:title" content="Gabe (Gabriel) Concepcion | IT Support & Security Analyst">
+  <meta property="og:title" content="Gabe (Gabriel) Concepcion | IT, Cybersecurity & Engineering Portfolio">
   <meta property="og:description" content="Technical portfolio covering IT systems administration, troubleshooting, Azure telemetry, and hands-on threat hunting reports.">
 
   <!-- Schema.org JSON-LD for Google Search & Recruiter Indexing -->
@@ -375,24 +375,32 @@
         padding: 10px 0 !important;
       }
     }
+      #additional-hunts {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      #additional-hunts:empty {
+        display: none;
+      }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div class="status-badge">
-        <span class="status-dot"></span> Open to IT Support & Security Roles
+        <span class="status-dot"></span> Open to IT, Engineering, & Security Roles
       </div>
       <h1>Gabe (Gabriel) U. Concepcion</h1>
-      <div class="subtitle">IT Support Specialist • Detection Engineering • Threat Hunting</div>
-      <p>Technical professional with strong foundations in Windows OS administration, network protocol diagnostics, Active Directory, and hypothesis-driven threat detection.</p>
+      <div class="subtitle">Systems Troubleshooting • Cybersecurity • Software Engineering</div>
+      <p>I investigate complex technical problems, build software-driven solutions, and explore how systems behave under real-world conditions. My work spans Windows and hardware diagnostics, network troubleshooting, security telemetry analysis, and computer vision engineering.</p>
       
       <div class="links">
-        <a href="#kinematics-project" id="headerDemoLink" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.14); color: #38bdf8; font-weight: 600;">★ Live Demo: Goalie Vision Engine ↓</a>
         <a href="https://www.linkedin.com/in/gabe-concepcion/" target="_blank" rel="noopener">LinkedIn Profile ↗</a>
         <a href="https://github.com/GabeConcepcion" target="_blank" rel="noopener">GitHub Profile ↗</a>
         <a href="https://github.com/GabeConcepcion/Threat-Hunting-Reports" target="_blank" rel="noopener">Threat Hunting Repo ↗</a>
         <a href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">Honeypot Project ↗</a>
+        <a href="#kinematics-project" id="headerDemoLink" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.14); color: #38bdf8; font-weight: 600;">★ Live Demo: Goalie Vision Engine ↓</a>
       </div>
     </header>
 
@@ -413,7 +421,7 @@
         <div class="skill-title">Certifications</div>
         <div class="tags" style="margin-top: 0.5rem;">
           <span class="tag">CompTIA Security+ (WIP)</span>
-          <span class="tag">CompTIA A+</span>
+          <span class="tag">CompTIA Project+</span>
           <span class="tag">AWS Cloud Practitioner</span>
           <span class="tag">ITIL 4</span>
         </div>
@@ -565,13 +573,61 @@
     </div>
 
     <!-- SECTION 5: DYNAMIC INVESTIGATIONS & REPORTS -->
-    <h2>Technical Reports & Investigations</h2>
-    <div id="dynamic-hunts" class="grid">
-      <div class="loading-state">
-        [+] Querying GitHub API for latest technical investigations...
-      </div>
+
+<h2>Technical Reports & Investigations</h2>
+<div id="dynamic-hunts" class="grid">
+
+  <a class="card"
+     href="https://github.com/GabeConcepcion/Threat-Hunting-Reports/blob/main/Dissecting-RDP-Compromise.md"
+     target="_blank" rel="noopener"
+     data-report-name="Dissecting-RDP-Compromise.md">
+    <div class="card-header">
+      <span class="card-title">
+        Dissecting RDP Compromise &amp; Lateral Movement
+        <span class="arrow">→</span>
+      </span>
+      <span class="badge mitre">T1021.001</span>
     </div>
-  </div>
+    <p>
+      Analysis of external RDP exposure, network authentication
+      diagnostics, and session traversal using Windows Security
+      Event IDs 4624/4625 (Logon Type 10) and client connection logs.
+    </p>
+    <div class="tags">
+      <span class="tag">Remote Desktop (RDP)</span>
+      <span class="tag">Windows Event 4624 Type 10</span>
+      <span class="tag">Lateral Movement</span>
+      <span class="tag">KQL</span>
+    </div>
+  </a>
+
+  <a class="card"
+     href="https://github.com/GabeConcepcion/Threat-Hunting-Reports/blob/main/Finance-User-Breach.md"
+     target="_blank" rel="noopener"
+     data-report-name="Finance-User-Breach.md">
+    <div class="card-header">
+      <span class="card-title">
+        Finance Department Targeted User Compromise
+        <span class="arrow">→</span>
+      </span>
+      <span class="badge mitre">T1566 / T1078</span>
+    </div>
+    <p>
+      Troubleshooting and forensic investigation of an identity
+      breach involving phishing, anomalous account sign-ins,
+      and permission auditing in enterprise identity environments.
+    </p>
+    <div class="tags">
+      <span class="tag">Active Directory / Entra ID</span>
+      <span class="tag">Phishing Analysis</span>
+      <span class="tag">Account Permissions</span>
+      <span class="tag">Log Analysis</span>
+    </div>
+  </a>
+
+  <div id="additional-hunts"></div>
+</div>
+
 
   <script>
     /* ========================================================================= */
@@ -1326,85 +1382,125 @@
     /* ========================================================================= */
     /* GITHUB API DYNAMIC THREAT HUNTING REPORTS LOADER                          */
     /* ========================================================================= */
-    async function loadRepoReports() {
-      const container = document.getElementById('dynamic-hunts');
-      const repoUser = 'GabeConcepcion';
-      const repoName = 'Threat-Hunting-Reports';
 
-      const reportMetadata = {
-        'Dissecting-RDP-Compromise.md': {
-          title: 'Dissecting RDP Compromise & Lateral Movement',
-          technique: 'T1021.001',
-          description: 'Analysis of external RDP exposure, network authentication diagnostics, and session traversal using Windows Security Event IDs 4624/4625 (Logon Type 10) and client connection logs.',
-          tags: ['Remote Desktop (RDP)', 'Windows Event 4624 Type 10', 'Lateral Movement', 'KQL']
-        },
-        'Finance-User-Breach.md': {
-          title: 'Finance Department Targeted User Compromise',
-          technique: 'T1566 / T1078',
-          description: 'Troubleshooting and forensic investigation of an identity breach involving phishing, anomalous account sign-ins, and permission auditing in enterprise identity environments.',
-          tags: ['Active Directory / Entra ID', 'Phishing Analysis', 'Account Permissions', 'Log Analysis']
-        }
-      };
+async function loadRepoReports() {
+  const container = document.getElementById('dynamic-hunts');
+  const additional = document.getElementById('additional-hunts');
 
-      try {
-        const res = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents`);
-        if (!res.ok) throw new Error('API fetch failed');
-        
-        const items = await res.json();
+  if (!container || !additional) return;
 
-        const reports = items.filter(item => 
-          item.type === 'dir' || 
-          (item.name.endsWith('.md') && !['README.md', 'LICENSE', 'CONTRIBUTING.md'].includes(item.name))
-        );
+  const repoUser = 'GabeConcepcion';
+  const repoName = 'Threat-Hunting-Reports';
 
-        if (reports.length === 0) {
-          container.innerHTML = `
-            <a class="card" href="https://github.com/${repoUser}/${repoName}" target="_blank" rel="noopener">
-              <div class="card-header">
-                <span class="card-title">Technical Reports Directory <span class="arrow">→</span></span>
-                <span class="badge mitre">Repository Index</span>
-              </div>
-              <p>Explore the full repository of technical writeups, telemetry analyses, and detection scripts.</p>
-            </a>`;
-          return;
-        }
+  const reportMetadata = {
+    'Dissecting-RDP-Compromise.md': {
+      title: 'Dissecting RDP Compromise & Lateral Movement',
+      technique: 'T1021.001',
+      description: 'Analysis of RDP exposure, Windows authentication events, and lateral movement.',
+      tags: ['RDP', 'Windows Events', 'Lateral Movement', 'KQL']
+    },
+    'Finance-User-Breach.md': {
+      title: 'Finance Department Targeted User Compromise',
+      technique: 'T1566 / T1078',
+      description: 'Forensic investigation of identity compromise and suspicious account activity.',
+      tags: ['Identity Security', 'Phishing', 'Log Analysis']
+    }
+  };
 
-        container.innerHTML = reports.map(report => {
-          const meta = reportMetadata[report.name] || {
-            title: report.name.replace(/[-_]/g, ' ').replace('.md', ''),
-            technique: report.type === 'dir' ? 'Investigation' : 'Report',
-            description: 'Technical report and system telemetry diagnostics hosted on GitHub.',
-            tags: ['Diagnostics', 'Windows Logs', 'Detection Logic']
-          };
+  // Reports already included in static HTML.
+  const featuredNames = new Set(
+    Array.from(
+      container.querySelectorAll('[data-report-name]')
+    ).map(card => card.dataset.reportName)
+  );
 
-          const tagElements = meta.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${repoUser}/${repoName}/contents`
+    );
 
-          return `
-            <a class="card" href="${report.html_url}" target="_blank" rel="noopener">
-              <div class="card-header">
-                <span class="card-title">${meta.title} <span class="arrow">→</span></span>
-                <span class="badge mitre">${meta.technique}</span>
-              </div>
-              <p>${meta.description}</p>
-              <div class="tags">
-                ${tagElements}
-              </div>
-            </a>
-          `;
-        }).join('');
-
-      } catch (err) {
-        container.innerHTML = `
-          <a class="card" href="https://github.com/${repoUser}/${repoName}" target="_blank" rel="noopener">
-            <div class="card-header">
-              <span class="card-title">Technical Reports Repository <span class="arrow">→</span></span>
-              <span class="badge mitre">GitHub</span>
-            </div>
-            <p>Access the complete directory of investigations, queries, and system reports directly.</p>
-          </a>`;
-      }
+    if (!response.ok) {
+      throw new Error('GitHub API request failed');
     }
 
+    const items = await response.json();
+
+    const reports = items.filter(item =>
+      (
+        item.type === 'dir' ||
+        (
+          item.type === 'file' &&
+          item.name.endsWith('.md') &&
+          !['README.md', 'LICENSE', 'CONTRIBUTING.md'].includes(item.name)
+        )
+      ) &&
+      !featuredNames.has(item.name)
+    );
+
+    // Build additional cards without replacing static ones.
+    const fragment = document.createDocumentFragment();
+
+    for (const report of reports) {
+      const meta = reportMetadata[report.name] || {
+        title: report.name
+          .replace(/[-_]/g, ' ')
+          .replace(/\.md$/, ''),
+        technique: report.type === 'dir'
+          ? 'Investigation'
+          : 'Report',
+        description: 'Technical investigation and system telemetry analysis hosted on GitHub.',
+        tags: ['Diagnostics', 'Security Analysis']
+      };
+
+      const card = document.createElement('a');
+      card.className = 'card';
+      card.href = report.html_url;
+      card.target = '_blank';
+      card.rel = 'noopener';
+      card.dataset.reportName = report.name;
+
+      const header = document.createElement('div');
+      header.className = 'card-header';
+
+      const title = document.createElement('span');
+      title.className = 'card-title';
+      title.textContent = meta.title + ' ';
+
+      const arrow = document.createElement('span');
+      arrow.className = 'arrow';
+      arrow.textContent = '→';
+      title.appendChild(arrow);
+
+      const badge = document.createElement('span');
+      badge.className = 'badge mitre';
+      badge.textContent = meta.technique;
+
+      header.append(title, badge);
+
+      const description = document.createElement('p');
+      description.textContent = meta.description;
+
+      const tags = document.createElement('div');
+      tags.className = 'tags';
+
+      for (const tagText of meta.tags) {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = tagText;
+        tags.appendChild(tag);
+      }
+
+      card.append(header, description, tags);
+      fragment.appendChild(card);
+    }
+
+    additional.replaceChildren(fragment);
+
+  } catch (error) {
+    // Static featured cards remain available.
+    console.warn('Additional reports unavailable:', error);
+  }
+}
     loadRepoReports();
   </script>
 </body>

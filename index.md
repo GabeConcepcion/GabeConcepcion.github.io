@@ -34,3 +34,8 @@ Technical professional combining software engineering foundations with enterpris
   Repository: https://github.com/GabeConcepcion/Honeypot-Report
 - Technical Reports & DFIR Investigations: Case studies on external RDP compromises (T1021.001), Living-off-the-Land (LotL) execution, and identity breach analysis using Sysmon and Windows Security Event logs.
   Repository: https://github.com/GabeConcepcion/Threat-Hunting-Reports
+
+## Autonomous Vision & Goalie Kinematics Engine
+- **Classification:** Closed Source / Applied Systems Engineering
+- **Stack:** Custom YOLO Model, Python, OpenCV, HDMI UVC Video Capture, Predictive Kinematics, Virtual HID Controller Emulation
+- **Summary:** Engineered a real-time autonomous defensive pipeline ingesting live HDMI capture card feeds. Trained a custom YOLO model to detect puck dynamics under strict sub-20ms frame budgets, computing 2D vector trajectories and driving virtual gamepad stick actuation in real time.

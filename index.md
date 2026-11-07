@@ -1,4 +1,4 @@
-# Gabe Concepcion — IT Support Specialist & Security Analyst
+# Gabe (Gabriel) U Concepcion — IT Support Specialist & Security Analyst
 
 - Location: Texas, USA
 - Degree: B.S. in Software Engineering, Western Governors University (Graduated April 2026)

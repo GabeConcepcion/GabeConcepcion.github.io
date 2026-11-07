@@ -40,7 +40,10 @@
       "Microsoft Sentinel",
       "Kusto Query Language (KQL)",
       "Threat Hunting",
-      "Sysmon & Event Logs"
+      "Sysmon & Event Logs",
+      "Computer Vision & OpenCV",
+      "YOLO Object Detection",
+      "Python Automation & Hardware Interfacing"
     ],
     "description": "IT and Cybersecurity professional experienced in Windows administration, endpoint troubleshooting, network services, and threat detection engineering."
   }
@@ -64,6 +67,9 @@
       --tag-text: #cbd5e1;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg);
@@ -158,10 +164,10 @@
       align-items: center;
       gap: 0.5rem;
     }
-    h2::before {
-      content: '//';
-      color: var(--accent);
-      font-family: 'Fira Code', monospace;
+    h2::before { 
+      content: '//'; 
+      color: var(--accent); 
+      font-family: 'Fira Code', monospace; 
     }
     
     .grid { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -267,6 +273,105 @@
       margin-bottom: 0.5rem;
       text-transform: uppercase;
     }
+    #kinematics-project:hover { transform: none; }
+
+    /* Desktop Telemetry HUD (Floating Overlay in Corner) */
+    .telemetry-hud {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      color: #38bdf8;
+      line-height: 1.65;
+      pointer-events: none;
+      background: rgba(2, 6, 23, 0.84);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      cursor: default;
+      display: block;
+    }
+
+    .telemetry-hud > div {
+      white-space: nowrap;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 640px) {
+      #kinematics-project {
+        padding: 16px !important;
+      }
+
+      .rink-container {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      /* Mobile Telemetry Bar: Full width, stacked 4 lines, zero truncation, zero jumping */
+      .telemetry-hud {
+        position: static !important;
+        order: -1 !important;
+        width: 100% !important;
+        height: 76px !important;
+        min-height: 76px !important;
+        max-height: 76px !important;
+        border: none !important;
+        border-bottom: 1px solid #334155 !important;
+        border-radius: 0 !important;
+        background: #020617 !important;
+        padding: 6px 10px !important;
+        font-size: 9px !important;
+        line-height: 1.35 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+
+      .telemetry-hud > div {
+        width: 100% !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: clip !important;
+      }
+
+      .telemetry-controls {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+      .telemetry-controls-group {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        width: 100% !important;
+      }
+      .telemetry-control-row {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .telemetry-control-select {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+      }
+      #goalieLatencySelect {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      #shootPuckBtn {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px 0 !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -280,6 +385,7 @@
       <p>Technical professional with strong foundations in Windows OS administration, network protocol diagnostics, Active Directory, and hypothesis-driven threat detection.</p>
       
       <div class="links">
+        <a href="#kinematics-project" id="headerDemoLink" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.14); color: #38bdf8; font-weight: 600;">★ Live Demo: Goalie Vision Engine ↓</a>
         <a href="https://www.linkedin.com/in/gabe-concepcion/" target="_blank" rel="noopener">LinkedIn Profile ↗</a>
         <a href="https://github.com/GabeConcepcion" target="_blank" rel="noopener">GitHub Profile ↗</a>
         <a href="https://github.com/GabeConcepcion/Threat-Hunting-Reports" target="_blank" rel="noopener">Threat Hunting Repo ↗</a>
@@ -367,7 +473,95 @@
       </a>
     </div>
 
-    <!-- SECTION 4: DYNAMIC INVESTIGATIONS & REPORTS -->
+    <!-- SECTION 4: APPLIED SYSTEMS & HARDWARE ENGINEERING -->
+    <h2>Applied Systems & Engineering</h2>
+    <div class="grid">
+      <div class="card" id="kinematics-project" style="background: #0b0f19; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; transition: border-color 0.2s; cursor: default;">
+        <!-- Header & Metadata Row -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px;">
+              <h3 style="margin: 0; font-size: 19px; color: #f8fafc; font-weight: 700;">
+                Autonomous Computer Vision & Goalie Kinematics Engine
+              </h3>
+              <span style="background: rgba(148, 163, 184, 0.1); border: 1px solid #475569; color: #94a3b8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; text-transform: uppercase;">
+                Proprietary / Closed Source
+              </span>
+            </div>
+            <p style="margin: 0; font-size: 14px; color: #94a3b8; max-width: 780px; line-height: 1.6;">
+              Engineered a real-time autonomous defensive pipeline ingesting live HDMI capture card feeds (UVC). Curated, annotated, and trained a custom <strong style="color: #f8fafc;">YOLO object detection model</strong> to track high-speed puck dynamics under strict frame latency budgets. Implemented 2D vector extrapolation, predictive angle bisection, and programmatic controller emulation to actuate analog defensive positioning in real time. Embedded below is a basic simulation of the project.
+            </p>
+          </div>
+          
+          <!-- Interactive Toggle Trigger -->
+          <button type="button" id="toggleKinematicsBtn" style="background: #0284c7; color: #ffffff; border: 1px solid #38bdf8; border-radius: 6px; padding: 8px 16px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);">
+            <span id="toggleIcon">▶</span> <span id="toggleText">Launch Interactive Telemetry</span>
+          </button>
+        </div>
+
+        <!-- Tech Stack Tags -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Custom YOLO Model</span>
+          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Python</span>
+          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">OpenCV</span>
+          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">HDMI Video Capture (UVC)</span>
+          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Predictive Kinematics</span>
+          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Virtual HID Controller Emulation</span>
+        </div>
+
+        <!-- Collapsible Simulation Sandbox Drawer -->
+        <div id="kinematicsDrawer" style="display: none; margin-top: 20px; border-top: 1px solid #1e293b; padding-top: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; color: #94a3b8; font-family: monospace;">
+              [+] TELEMETRY BENCH: Move cursor over offensive zone to steer carrier, click anywhere to shoot.
+            </span>
+            <span style="background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80; color: #4ade80; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;">
+              60 FPS LIVE PIPELINE
+            </span>
+          </div>
+
+          <!-- Rink Canvas Container -->
+          <div class="rink-container" style="position: relative; width: 100%; max-width: 740px; margin: 0 auto; background: #050b14; border: 1px solid #334155; border-radius: 8px; overflow: hidden; cursor: crosshair;">
+            <canvas id="goalieCanvas" width="740" height="490" style="width: 100%; height: auto; display: block;"></canvas>
+            
+            <!-- Telemetry HUD: Floating on Desktop, Stacked Bar on Mobile -->
+            <div class="telemetry-hud">
+              <div>AI STATE: <span id="hud-status" style="color: #4ade80; font-weight: bold;">SHADOWING CARRIER</span></div>
+              <div>PUCK VECTOR: <span id="hud-vel" style="color: #f1f5f9;">0.0 px/f</span></div>
+              <div>CREASE TARGET: <span id="hud-intercept" style="color: #f1f5f9;">--</span></div>
+              <div>SAVE EFFICIENCY: <span id="hud-saves" style="color: #4ade80;">0</span> / <span id="hud-shots">0</span> (<span id="hud-pct">100%</span>)</div>
+            </div>
+          </div>
+
+          <!-- Interactive Telemetry Controls -->
+          <div class="telemetry-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: 13px; color: #cbd5e1;">
+            <div class="telemetry-controls-group" style="display: flex; gap: 18px; align-items: center; flex-wrap: wrap;">
+              <label class="telemetry-control-row" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>Shot Velocity:</span>
+                <input type="range" id="puckSpeedSlider" min="7" max="17" value="11" style="accent-color: #38bdf8; cursor: pointer;">
+              </label>
+              <label class="telemetry-control-select" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>Capture Pipeline:</span>
+                <select id="goalieLatencySelect" style="background: #1e293b; color: #f8fafc; border: 1px solid #475569; border-radius: 6px; padding: 4px 10px; cursor: pointer;">
+                  <option value="16" selected>16 ms (Capture Card + OpenCV)</option>
+                  <option value="85">85 ms (Standard Software Grab)</option>
+                  <option value="200">200 ms (High Latency Stress Test)</option>
+                </select>
+              </label>
+              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="autoFireToggle" style="accent-color: #38bdf8; cursor: pointer;">
+                <span>Auto-Fire Barrage</span>
+              </label>
+            </div>
+            <button type="button" id="shootPuckBtn" style="background: #0284c7; color: #ffffff; border: 1px solid #38bdf8; border-radius: 6px; padding: 8px 20px; font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);">
+              Shoot Puck
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: DYNAMIC INVESTIGATIONS & REPORTS -->
     <h2>Technical Reports & Investigations</h2>
     <div id="dynamic-hunts" class="grid">
       <div class="loading-state">
@@ -377,6 +571,758 @@
   </div>
 
   <script>
+    /* ========================================================================= */
+    /* GOALIE KINEMATICS DRAWER & SIMULATION ENGINE                              */
+    /* ========================================================================= */
+    (function() {
+      let isSimRunning = false;
+      let animFrameId = null;
+      let autoFireTimer = null;
+      let simInitialized = false;
+      let runSimInstance = null;
+
+      const toggleBtn = document.getElementById('toggleKinematicsBtn');
+      const drawer = document.getElementById('kinematicsDrawer');
+      const toggleIcon = document.getElementById('toggleIcon');
+      const toggleText = document.getElementById('toggleText');
+
+      function openTelemetryDrawer() {
+        drawer.style.display = 'block';
+        toggleIcon.innerText = '✕';
+        toggleText.innerText = 'Close Telemetry';
+        toggleBtn.style.background = '#0f172a';
+        toggleBtn.style.borderColor = '#64748b';
+
+        if (!simInitialized) {
+          runSimInstance = initKinematicsSimulation();
+          simInitialized = true;
+        } else if (runSimInstance) {
+          runSimInstance.resume();
+        }
+
+        setTimeout(() => {
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+
+      function closeTelemetryDrawer() {
+        drawer.style.display = 'none';
+        toggleIcon.innerText = '▶';
+        toggleText.innerText = 'Launch Interactive Telemetry';
+        toggleBtn.style.background = '#0284c7';
+        toggleBtn.style.borderColor = '#38bdf8';
+
+        if (runSimInstance) {
+          runSimInstance.pause();
+        }
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          if (drawer.style.display === 'none') {
+            openTelemetryDrawer();
+          } else {
+            closeTelemetryDrawer();
+          }
+        });
+      }
+
+      const headerDemoLink = document.getElementById('headerDemoLink');
+      if (headerDemoLink) {
+        headerDemoLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (drawer.style.display === 'none') {
+            openTelemetryDrawer();
+          } else {
+            drawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+
+      function initKinematicsSimulation() {
+        const canvas = document.getElementById('goalieCanvas');
+        if (!canvas) return null;
+        const ctx = canvas.getContext('2d');
+
+        const speedSlider = document.getElementById('puckSpeedSlider');
+        const latencySelect = document.getElementById('goalieLatencySelect');
+        const autoFireToggle = document.getElementById('autoFireToggle');
+        const shootBtn = document.getElementById('shootPuckBtn');
+
+        const hudStatus = document.getElementById('hud-status');
+        const hudVel = document.getElementById('hud-vel');
+        const hudIntercept = document.getElementById('hud-intercept');
+        const hudSaves = document.getElementById('hud-saves');
+        const hudShots = document.getElementById('hud-shots');
+        const hudPct = document.getElementById('hud-pct');
+
+        const W = canvas.width;
+        const H = canvas.height;
+
+        // Rink Geometry
+        const goalLineY = 415;
+        const netWidth = 184;
+        const netDepth = 38;
+        const netLeft = (W / 2) - (netWidth / 2);
+        const netRight = (W / 2) + (netWidth / 2);
+        const creaseRadius = 92;
+        const postRadius = 5;
+
+        let totalShots = 0;
+        let totalSaves = 0;
+        let puckTrail = [];
+        let ripples = [];
+        let hoverPos = { x: W / 2, y: 85, active: false };
+        let patrolAngle = 0;
+
+        const goalie = {
+          x: W / 2,
+          y: goalLineY - 28,
+          angle: 0,
+          targetX: W / 2,
+          targetY: goalLineY - 28,
+          targetAngle: 0,
+          smoothing: 0.17,
+          reachRadius: 34,
+          isButterfly: false,
+          butterflyTimer: 0,
+          stickLX: 0,
+          stickLY: 0
+        };
+
+        const puck = {
+          x: W / 2,
+          y: 85,
+          radius: 7,
+          vx: 0,
+          vy: 0,
+          state: 'carrier',
+          rayPoints: [],
+          goalLineX: null,
+          isOnTarget: false,
+          conf: 99.4,
+          resetCooldown: 0
+        };
+
+        function computeCreasePosition(px, py, isShotInbound, projectedGoalLineX, isShotOnNet) {
+          const dx = px - (W / 2);
+          const dy = Math.min(py, goalLineY - 15) - goalLineY;
+          const dist = Math.hypot(dx, dy) || 1;
+
+          if (isShotInbound && projectedGoalLineX !== null) {
+            const creaseDepth = 52;
+            const rawX = isShotOnNet
+              ? (projectedGoalLineX + (dx / dist) * 28)
+              : ((W / 2) + (dx / dist) * (netWidth * 0.44));
+            const clampedX = Math.max(netLeft + 26, Math.min(netRight - 26, rawX));
+            const clampedY = Math.min(goalLineY - 14, goalLineY + (dy / dist) * creaseDepth);
+            const angle = Math.atan2(py - clampedY, px - clampedX) + Math.PI / 2;
+            return {
+              x: clampedX,
+              y: clampedY,
+              angle: Math.max(-0.58, Math.min(0.58, angle))
+            };
+          } else {
+            const shadowDepth = 38;
+            const rawX = (W / 2) + (dx / dist) * 44;
+            const clampedX = Math.max(netLeft + 28, Math.min(netRight - 28, rawX));
+            const clampedY = Math.min(goalLineY - 16, goalLineY + (dy / dist) * shadowDepth);
+            const angle = Math.atan2(py - clampedY, px - clampedX) + Math.PI / 2;
+            return {
+              x: clampedX,
+              y: clampedY,
+              angle: Math.max(-0.52, Math.min(0.52, angle))
+            };
+          }
+        }
+
+        function computeTrajectory(startX, startY, vx, vy, targetY) {
+          const points = [{ x: startX, y: startY }];
+          let currX = startX;
+          let currY = startY;
+          let currVx = vx;
+          const remY = targetY - currY;
+          if (vy <= 0 || remY <= 0) return { points, finalX: startX };
+
+          const tTotal = remY / vy;
+          let nextX = currX + currVx * tTotal;
+
+          if (nextX < puck.radius) {
+            const tWall = (puck.radius - currX) / currVx;
+            const wallY = currY + vy * tWall;
+            points.push({ x: puck.radius, y: wallY });
+            const tRem = tTotal - tWall;
+            nextX = puck.radius + (-currVx) * tRem;
+          } else if (nextX > W - puck.radius) {
+            const tWall = (W - puck.radius - currX) / currVx;
+            const wallY = currY + vy * tWall;
+            points.push({ x: W - puck.radius, y: wallY });
+            const tRem = tTotal - tWall;
+            nextX = (W - puck.radius) + (-currVx) * tRem;
+          }
+
+          points.push({ x: nextX, y: targetY });
+          return { points, finalX: nextX };
+        }
+
+        function shootPuck(customClickX, customClickY) {
+          if (typeof customClickX === 'number' && typeof customClickY === 'number' && customClickY < goalLineY - 95) {
+            puck.x = Math.max(40, Math.min(W - 40, customClickX));
+            puck.y = Math.max(45, customClickY);
+          } else if (puck.state === 'carrier') {
+            puck.x = Math.max(50, Math.min(W - 50, puck.x));
+            puck.y = Math.max(55, Math.min(220, puck.y));
+          } else {
+            puck.x = W * 0.16 + Math.random() * (W * 0.68);
+            puck.y = 65 + Math.random() * 75;
+          }
+
+          puckTrail = [];
+          goalie.isButterfly = false;
+          puck.conf = (98.4 + Math.random() * 1.5).toFixed(1);
+
+          const speed = speedSlider ? parseFloat(speedSlider.value) : 11;
+          let aimX;
+          if (typeof customClickX === 'number' && customClickY >= goalLineY - 95) {
+            aimX = customClickX;
+          } else {
+            aimX = (Math.random() < 0.82)
+              ? (netLeft + 14 + Math.random() * (netWidth - 28))
+              : (netLeft - 45 + Math.random() * (netWidth + 90));
+          }
+
+          const angle = Math.atan2(goalLineY - puck.y, aimX - puck.x);
+          puck.vx = Math.cos(angle) * speed;
+          puck.vy = Math.sin(angle) * speed;
+          puck.state = 'inbound';
+
+          totalShots++;
+          if (hudShots) hudShots.innerText = totalShots;
+          if (hudVel) hudVel.innerText = `${speed.toFixed(1)} px/f (${Math.round(speed * 7.8)} mph)`;
+
+          const traj = computeTrajectory(puck.x, puck.y, puck.vx, puck.vy, goalLineY);
+          puck.rayPoints = traj.points;
+          puck.goalLineX = traj.finalX;
+          puck.isOnTarget = (puck.goalLineX >= netLeft - 4 && puck.goalLineX <= netRight + 4);
+
+          const shotOrigin = puck.rayPoints.length > 2 ? puck.rayPoints[1] : puck.rayPoints[0];
+          const optimalPose = computeCreasePosition(shotOrigin.x, shotOrigin.y, true, puck.goalLineX, puck.isOnTarget);
+
+          if (hudStatus) {
+            hudStatus.innerText = puck.isOnTarget ? 'SHOT DETECTED • INTERCEPTING' : 'SHOT WIDE • HOLDING POST';
+            hudStatus.style.color = puck.isOnTarget ? '#38bdf8' : '#f59e0b';
+          }
+          if (hudIntercept) {
+            hudIntercept.innerText = `(${Math.round(optimalPose.x)}, ${Math.round(optimalPose.y)})`;
+          }
+
+          const delay = latencySelect ? parseInt(latencySelect.value, 10) : 16;
+          setTimeout(() => {
+            if (puck.state === 'inbound') {
+              goalie.targetX = optimalPose.x;
+              goalie.targetY = optimalPose.y;
+              goalie.targetAngle = optimalPose.angle;
+            }
+          }, delay);
+        }
+
+        function update() {
+          if (!isSimRunning) return;
+
+          if (puck.state === 'carrier') {
+            if (hoverPos.active && hoverPos.y < goalLineY - 90) {
+              puck.x += (hoverPos.x - puck.x) * 0.22;
+              puck.y += (hoverPos.y - puck.y) * 0.22;
+            } else {
+              patrolAngle += 0.022;
+              puck.x = (W / 2) + Math.sin(patrolAngle) * 210;
+              puck.y = 85 + Math.cos(patrolAngle * 2) * 22;
+            }
+            const shadowPose = computeCreasePosition(puck.x, puck.y, false, null, false);
+            goalie.targetX = shadowPose.x;
+            goalie.targetY = shadowPose.y;
+            goalie.targetAngle = shadowPose.angle;
+
+            if (hudStatus) {
+              hudStatus.innerText = 'SHADOWING PUCK CARRIER';
+              hudStatus.style.color = '#38bdf8';
+            }
+            if (hudVel) hudVel.innerText = 'CARRIER POS LOCKED';
+            if (hudIntercept) hudIntercept.innerText = `(${Math.round(shadowPose.x)}, ${Math.round(shadowPose.y)})`;
+          }
+
+          if (puck.state === 'rebound') {
+            const reboundPose = computeCreasePosition(puck.x, puck.y, false, null, false);
+            goalie.targetX = reboundPose.x;
+            goalie.targetY = reboundPose.y;
+            goalie.targetAngle = reboundPose.angle;
+          }
+
+          if (puck.state === 'scored') {
+            goalie.targetX = W / 2;
+            goalie.targetY = goalLineY - 26;
+            goalie.targetAngle = 0;
+            puck.resetCooldown--;
+            if (puck.resetCooldown <= 0) {
+              puck.state = 'carrier';
+            }
+          }
+
+          const errX = goalie.targetX - goalie.x;
+          const errY = goalie.targetY - goalie.y;
+          goalie.stickLX = Math.max(-1, Math.min(1, errX / 40));
+          goalie.stickLY = Math.max(-1, Math.min(1, errY / 30));
+
+          goalie.x += errX * goalie.smoothing;
+          goalie.y += errY * goalie.smoothing;
+          goalie.angle += (goalie.targetAngle - goalie.angle) * goalie.smoothing;
+
+          if (goalie.butterflyTimer > 0) {
+            goalie.butterflyTimer--;
+            if (goalie.butterflyTimer === 0) goalie.isButterfly = false;
+          }
+
+          for (let i = ripples.length - 1; i >= 0; i--) {
+            ripples[i].r += 2.2;
+            ripples[i].alpha -= 0.04;
+            if (ripples[i].alpha <= 0) ripples.splice(i, 1);
+          }
+
+          if (puck.state === 'inbound' || puck.state === 'rebound' || puck.state === 'scored') {
+            if (puck.state !== 'scored') {
+              puckTrail.push({ x: puck.x, y: puck.y });
+              if (puckTrail.length > 15) puckTrail.shift();
+            }
+
+            puck.x += puck.vx;
+            puck.y += puck.vy;
+
+            if (puck.x - puck.radius <= 0) {
+              puck.x = puck.radius;
+              puck.vx = -puck.vx;
+            } else if (puck.x + puck.radius >= W) {
+              puck.x = W - puck.radius;
+              puck.vx = -puck.vx;
+            }
+
+            if (puck.state === 'inbound') {
+              const distToGoalie = Math.hypot(puck.x - goalie.x, puck.y - goalie.y);
+              if (distToGoalie <= goalie.reachRadius + puck.radius) {
+                totalSaves++;
+                goalie.isButterfly = true;
+                goalie.butterflyTimer = 28;
+
+                puck.state = 'rebound';
+                const deflectDir = (puck.x >= goalie.x) ? 1 : -1;
+                const reboundAngle = -Math.PI / 2 + deflectDir * (0.65 + Math.random() * 0.45);
+                const reboundSpeed = Math.hypot(puck.vx, puck.vy) * 0.55;
+                puck.vx = Math.cos(reboundAngle) * reboundSpeed;
+                puck.vy = Math.sin(reboundAngle) * reboundSpeed;
+
+                ripples.push({ x: puck.x, y: puck.y, r: 8, alpha: 0.9, color: '#4ade80' });
+
+                if (hudSaves) hudSaves.innerText = totalSaves;
+                if (hudStatus) {
+                  hudStatus.innerText = 'SAVE • TRACKING REBOUND';
+                  hudStatus.style.color = '#4ade80';
+                }
+              }
+            }
+
+            const distLeftPost = Math.hypot(puck.x - netLeft, puck.y - goalLineY);
+            const distRightPost = Math.hypot(puck.x - netRight, puck.y - goalLineY);
+            if (puck.state === 'inbound' && (distLeftPost <= postRadius + puck.radius || distRightPost <= postRadius + puck.radius)) {
+              puck.vy = -Math.abs(puck.vy) * 0.6;
+              puck.vx *= 1.1;
+              puck.state = 'rebound';
+              ripples.push({ x: puck.x, y: puck.y, r: 6, alpha: 0.9, color: '#f59e0b' });
+              if (hudStatus) {
+                hudStatus.innerText = 'POST DEFLECTION • TRACKING LOOSE PUCK';
+                hudStatus.style.color = '#f59e0b';
+              }
+            }
+
+            if (puck.state === 'inbound' && puck.y >= goalLineY) {
+              if (puck.x > netLeft + postRadius && puck.x < netRight - postRadius) {
+                puck.state = 'scored';
+                puck.resetCooldown = 55;
+                puck.vx *= 0.22;
+                puck.vy *= 0.22;
+                ripples.push({ x: puck.x, y: goalLineY, r: 10, alpha: 1.0, color: '#ef4444' });
+                if (hudStatus) {
+                  hudStatus.innerText = 'GOAL CONCEDED • RESETTING CREASE';
+                  hudStatus.style.color = '#ef4444';
+                }
+              } else if (puck.y > goalLineY + 22) {
+                puck.vy = -Math.abs(puck.vy) * 0.5;
+                puck.state = 'rebound';
+                if (hudStatus) {
+                  hudStatus.innerText = 'END-BOARD REBOUND • TRACKING';
+                  hudStatus.style.color = '#94a3b8';
+                }
+              }
+            }
+
+            if (puck.state === 'scored' && puck.y >= goalLineY + netDepth - 8) {
+              puck.vx = 0;
+              puck.vy = 0;
+            }
+
+            if (puck.state === 'rebound') {
+              puck.vx *= 0.982;
+              puck.vy *= 0.982;
+              if (Math.hypot(puck.vx, puck.vy) < 1.1 || puck.y < 30 || puck.y > H - 10) {
+                puck.state = 'carrier';
+                puckTrail = [];
+              }
+            }
+
+            if (hudPct && totalShots > 0) {
+              hudPct.innerText = `${Math.round((totalSaves / totalShots) * 100)}%`;
+            }
+          }
+
+          draw();
+          animFrameId = requestAnimationFrame(update);
+        }
+
+        function drawRink() {
+          ctx.fillStyle = '#050b14';
+          ctx.fillRect(0, 0, W, H);
+
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+          ctx.lineWidth = 1;
+          for (let x = 0; x <= W; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+          }
+          for (let y = 0; y <= H; y += 40) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+          }
+
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.28)';
+          ctx.fillRect(0, 42, W, 5);
+
+          ctx.strokeStyle = 'rgba(239, 68, 68, 0.16)';
+          ctx.lineWidth = 1.5;
+          [155, W - 155].forEach(cx => {
+            ctx.beginPath(); ctx.arc(cx, 195, 68, 0, Math.PI * 2); ctx.stroke();
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.35)';
+            ctx.beginPath(); ctx.arc(cx, 195, 5, 0, Math.PI * 2); ctx.fill();
+          });
+
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.14)';
+          ctx.beginPath();
+          ctx.arc(W / 2, goalLineY, creaseRadius, Math.PI, 0, false);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(239, 68, 68, 0.75)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+          ctx.fillRect(netLeft, goalLineY, netWidth, netDepth);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+          ctx.lineWidth = 1;
+          for (let x = netLeft; x <= netRight; x += 10) {
+            ctx.beginPath(); ctx.moveTo(x, goalLineY); ctx.lineTo(x, goalLineY + netDepth); ctx.stroke();
+          }
+          for (let y = goalLineY; y <= goalLineY + netDepth; y += 8) {
+            ctx.beginPath(); ctx.moveTo(netLeft, y); ctx.lineTo(netRight, y); ctx.stroke();
+          }
+
+          ctx.strokeStyle = '#ef4444';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath(); ctx.moveTo(0, goalLineY); ctx.lineTo(W, goalLineY); ctx.stroke();
+          ctx.lineWidth = 3;
+          ctx.strokeRect(netLeft, goalLineY, netWidth, netDepth);
+
+          ctx.fillStyle = '#f87171';
+          ctx.beginPath(); ctx.arc(netLeft, goalLineY, postRadius, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(netRight, goalLineY, postRadius, 0, Math.PI * 2); ctx.fill();
+        }
+
+        function drawVisionOverlays() {
+          if (puck.state !== 'scored') {
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.05)';
+            ctx.beginPath();
+            ctx.moveTo(puck.x, puck.y);
+            ctx.lineTo(netLeft, goalLineY);
+            ctx.lineTo(netRight, goalLineY);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.18)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(puck.x, puck.y); ctx.lineTo(netLeft, goalLineY);
+            ctx.moveTo(puck.x, puck.y); ctx.lineTo(netRight, goalLineY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+
+          if (puck.state === 'inbound' && puck.rayPoints.length >= 2) {
+            ctx.strokeStyle = puck.isOnTarget ? 'rgba(56, 189, 248, 0.7)' : 'rgba(245, 158, 11, 0.45)';
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(puck.x, puck.y);
+            for (let i = 1; i < puck.rayPoints.length; i++) {
+              ctx.lineTo(puck.rayPoints[i].x, puck.rayPoints[i].y);
+            }
+            ctx.stroke();
+          }
+
+          ctx.strokeStyle = '#4ade80';
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.arc(goalie.targetX, goalie.targetY, 6, 0, Math.PI * 2);
+          ctx.moveTo(goalie.targetX - 10, goalie.targetY); ctx.lineTo(goalie.targetX + 10, goalie.targetY);
+          ctx.moveTo(goalie.targetX, goalie.targetY - 10); ctx.lineTo(goalie.targetX, goalie.targetY + 10);
+          ctx.stroke();
+
+          const boxSize = 24;
+          const bx = puck.x - boxSize / 2;
+          const by = puck.y - boxSize / 2;
+
+          ctx.strokeStyle = '#4ade80';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(bx, by, boxSize, boxSize);
+
+          ctx.fillStyle = '#4ade80';
+          ctx.font = 'bold 9px ui-monospace, SFMono-Regular, Menlo, monospace';
+          ctx.fillText(`PUCK ${puck.conf}% [${Math.round(puck.x)},${Math.round(puck.y)}]`, bx + 28, by + 10);
+        }
+
+        function drawGoalie(gx, gy, angle) {
+          ctx.save();
+          ctx.translate(gx, gy);
+          ctx.rotate(angle);
+
+          const padW = 16;
+          const padH = 24;
+          const spread = goalie.isButterfly ? 23 : 16;
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.strokeStyle = '#0284c7';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(-spread - padW / 2, -10, padW, padH, 3);
+          ctx.roundRect(spread - padW / 2, -10, padW, padH, 3);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#0284c7';
+          ctx.fillRect(-spread - padW / 2, -2, padW, 4);
+          ctx.fillRect(spread - padW / 2, -2, padW, 4);
+
+          ctx.fillStyle = '#f59e0b';
+          ctx.strokeStyle = '#78350f';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.roundRect(-22, -16, 44, 5, 2);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#0f172a';
+          ctx.strokeStyle = '#38bdf8';
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 21, 12, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.strokeStyle = '#0284c7';
+          ctx.lineWidth = 1.5;
+          ctx.fillRect(20, -10, 8, 16);
+          ctx.strokeRect(20, -10, 8, 16);
+
+          ctx.beginPath();
+          ctx.arc(-25, -4, 7.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.beginPath();
+          ctx.arc(0, -2, 7.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#475569';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(-4, -4); ctx.lineTo(4, -4);
+          ctx.moveTo(0, -7); ctx.lineTo(0, 1);
+          ctx.stroke();
+
+          ctx.restore();
+        }
+
+        function drawVirtualStickHUD() {
+          const hudX = W - 64;
+          const hudY = 58;
+          const r = 34;
+
+          ctx.fillStyle = 'rgba(2, 6, 23, 0.82)';
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.roundRect(hudX - 48, hudY - 44, 96, 108, 6);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.strokeStyle = '#334155';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(hudX, hudY, r, 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+          ctx.beginPath();
+          ctx.moveTo(hudX - r, hudY); ctx.lineTo(hudX + r, hudY);
+          ctx.moveTo(hudX, hudY - r); ctx.lineTo(hudX + r, hudY);
+          ctx.stroke();
+
+          const sx = hudX + goalie.stickLX * (r - 6);
+          const sy = hudY + goalie.stickLY * (r - 6);
+
+          ctx.strokeStyle = '#38bdf8';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(hudX, hudY);
+          ctx.lineTo(sx, sy);
+          ctx.stroke();
+
+          ctx.fillStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.arc(sx, sy, 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = 'bold 9px ui-monospace, SFMono-Regular, Menlo, monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('VIRTUAL HID L-STICK', hudX, hudY - 30);
+          ctx.fillStyle = '#e2e8f0';
+          ctx.fillText(`X:${goalie.stickLX.toFixed(2)} Y:${goalie.stickLY.toFixed(2)}`, hudX, hudY + r + 15);
+          ctx.textAlign = 'left';
+        }
+
+        function draw() {
+          drawRink();
+          drawVisionOverlays();
+
+          ripples.forEach(rp => {
+            ctx.strokeStyle = rp.color;
+            ctx.globalAlpha = Math.max(0, rp.alpha);
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.globalAlpha = 1.0;
+          });
+
+          for (let i = 0; i < puckTrail.length; i++) {
+            const alpha = ((i + 1) / puckTrail.length) * 0.35;
+            ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(puckTrail[i].x, puckTrail[i].y, puck.radius * 0.72, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          drawGoalie(goalie.x, goalie.y, goalie.angle);
+
+          ctx.fillStyle = '#090d16';
+          ctx.beginPath();
+          ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#38bdf8';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          drawVirtualStickHUD();
+        }
+
+        if (shootBtn) {
+          shootBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            shootPuck();
+          });
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          hoverPos.x = (e.clientX - rect.left) * (W / rect.width);
+          hoverPos.y = (e.clientY - rect.top) * (H / rect.height);
+          hoverPos.active = true;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+          hoverPos.active = false;
+        });
+
+        canvas.addEventListener('click', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const clickX = (e.clientX - rect.left) * (W / rect.width);
+          const clickY = (e.clientY - rect.top) * (H / rect.height);
+          shootPuck(clickX, clickY);
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          const rect = canvas.getBoundingClientRect();
+          const touch = e.touches[0];
+          const clickX = (touch.clientX - rect.left) * (W / rect.width);
+          const clickY = (touch.clientY - rect.top) * (H / rect.height);
+          shootPuck(clickX, clickY);
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', (e) => {
+          e.preventDefault();
+          const rect = canvas.getBoundingClientRect();
+          const touch = e.touches[0];
+          hoverPos.x = (touch.clientX - rect.left) * (W / rect.width);
+          hoverPos.y = (touch.clientY - rect.top) * (H / rect.height);
+          hoverPos.active = true;
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          hoverPos.active = false;
+          shootPuck();
+        }, { passive: false });
+
+        if (autoFireToggle) {
+          autoFireToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+              shootPuck();
+              autoFireTimer = setInterval(() => shootPuck(), 1500);
+            } else {
+              clearInterval(autoFireTimer);
+            }
+          });
+        }
+
+        isSimRunning = true;
+        shootPuck();
+        animFrameId = requestAnimationFrame(update);
+
+        return {
+          pause: () => {
+            isSimRunning = false;
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+            if (autoFireTimer) clearInterval(autoFireTimer);
+            if (autoFireToggle) autoFireToggle.checked = false;
+          },
+          resume: () => {
+            if (!isSimRunning) {
+              isSimRunning = true;
+              animFrameId = requestAnimationFrame(update);
+            }
+          }
+        };
+      }
+    })();
+
+    /* ========================================================================= */
+    /* GITHUB API DYNAMIC THREAT HUNTING REPORTS LOADER                          */
+    /* ========================================================================= */
     async function loadRepoReports() {
       const container = document.getElementById('dynamic-hunts');
       const repoUser = 'GabeConcepcion';

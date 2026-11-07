@@ -1,0 +1,9 @@
+# Gabe Concepcion
+
+> IT Support Specialist & Security Analyst Portfolio
+
+## Core Information
+- [Full Profile Markdown](https://gabeconcepcion.com/index.md): Professional summary, certifications, core technical competencies, and featured infrastructure labs.
+- [Portfolio Website](https://gabeconcepcion.com/): Interactive web portfolio.
+- [GitHub Profile](https://github.com/GabeConcepcion): Public repositories, SIEM honeypot project, and threat hunting writeups.
+- [LinkedIn Profile](https://www.linkedin.com/in/gabe-concepcion/): Professional background, certifications, and career history.

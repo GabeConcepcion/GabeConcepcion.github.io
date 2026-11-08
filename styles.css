@@ -1,0 +1,273 @@
+/*
+  Gabe Concepcion
+  A standalone, single-page portfolio. No framework or JS dependency for layout.
+*/
+:root {
+  color-scheme: dark;
+  --bg: #131819;
+  --panel: #1e2a28;
+  --panel-deep: #141d1c;
+  --line: #455752;
+  --line-soft: #384842;
+  --accent: #a1d3c3;
+  --accent-strong: #c9f0e2;
+  --cream: #f5f2eb;
+  --text: #d0d9d3;
+  --muted: #acbdb5;
+  --text-bright: var(--cream);
+  --border: var(--line);
+  --border-hover: #7fa49b;
+  --card-bg: var(--panel);
+  --card-hover: #202d2c;
+  --tag-bg: transparent;
+  --tag-text: #c2d0c8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  padding: 0 clamp(1.2rem, 5vw, 5rem) 6rem;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.72 'DM Sans', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #7dad9d; color: #0b1716; }
+a { color: inherit; }
+.container { max-width: 960px; margin: auto; counter-reset: sections; }
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 4px; }
+
+/* A single quiet color signature, not a neon background wash. */
+.container::before {
+  content: ''; display: block; height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--accent), #627e78 30%, transparent 76%);
+}
+header { padding: 2.4rem 0 3.4rem; }
+.status-badge {
+  display: inline-flex; align-items: center; gap: .55rem;
+  margin-bottom: 1.2rem;
+  color: #cedbd3; font: 500 .76rem/1.5 'DM Mono', monospace;
+  letter-spacing: .035em;
+}
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #89ba9d; }
+h1 {
+  color: var(--cream);
+  font: 400 clamp(3.6rem, 7.5vw, 6.7rem)/.95 'Instrument Serif', Georgia, serif;
+  letter-spacing: -.032em;
+  margin: 0 0 1.5rem;
+}
+h1 em { font-weight: 400; color: #c2d2c9; }
+.subtitle { color: #e0e7dd; font: 500 clamp(1rem, 1.65vw, 1.1rem)/1.6 'DM Sans', sans-serif; margin-bottom: 1rem; }
+.subtitle span { color: var(--accent); padding: 0 .16rem; }
+header > p { color: var(--text); max-width: 68ch; font-size: 1.055rem; line-height: 1.75; }
+.links { display: flex; flex-wrap: wrap; gap: .65rem 1.7rem; margin-top: 1.8rem; }
+.links a { color: #e8f2ea; font: 600 .86rem/1.5 'DM Sans', sans-serif; text-decoration: none; border-bottom: 1px solid #7e9f94; padding-bottom: .32rem; transition: border-color .2s,color .2s; }
+.links a span { color: var(--accent); margin-left: .12rem; }
+.links a:hover { color: var(--accent-strong); border-color: var(--accent-strong); }
+#headerDemoLink { color: var(--accent-strong); border-color: var(--accent); }
+.credentials {
+  display: grid; grid-template-columns: .82fr 1.18fr;
+  gap: 1.6rem; margin-top: 2.75rem; padding: 1.35rem 0;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.credential { min-width: 0; display: flex; flex-direction: column; gap: .18rem; }
+.credential + .credential { border-left: 1px solid var(--line-soft); padding-left: 1.65rem; }
+.credential-label { color: var(--accent); font: 500 .73rem/1.7 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .10em; margin-bottom: .24rem; }
+.credential strong { color: #f0f1e9; font: 600 .95rem/1.65 'DM Sans', sans-serif; }
+.credential-detail { color: #b8c6be; font-size: .85rem; }
+
+/* Section names behave like the chapter titles of a technical journal. */
+h2 {
+  display: flex; align-items: baseline; gap: 1.1rem;
+  border-top: 1px solid var(--line); padding-top: 1.5rem;
+  margin: 2.3rem 0 1.3rem;
+  color: var(--cream);
+  font: 400 clamp(2.1rem, 3.8vw, 3rem)/1.14 'Instrument Serif', Georgia, serif;
+  letter-spacing: -.012em;
+}
+h2::before { counter-increment: sections; content: '0' counter(sections) ' /'; font: 500 .77rem/1.6 'DM Mono', monospace; color: var(--accent); white-space: nowrap; letter-spacing: .035em; }
+.grid { display: flex; flex-direction: column; gap: 0; }
+.card { color: inherit; text-decoration: none; }
+.card:hover { transform: none; box-shadow: none; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin: .45rem 0 .85rem; }
+.card-title { display: inline-flex; align-items: baseline; gap: .55rem; color: var(--cream); font: 600 clamp(1.22rem, 2.2vw, 1.49rem)/1.42 'DM Sans', sans-serif; letter-spacing: -.025em; }
+.card-title .arrow { font: 600 1.12rem/1 'DM Sans', sans-serif; color: var(--accent-strong); transition: transform .2s; }
+.card:hover .card-title .arrow { transform: translate(3px,-2px); }
+.card p { max-width: 74ch; color: var(--text); font: 400 1rem/1.72 'DM Sans', sans-serif; margin-bottom: .85rem; }
+.badge { color: #c8e5d9; white-space: nowrap; font: 500 .73rem/1.7 'DM Mono',monospace; border: 1px solid #45645a; border-radius: 3px; padding: .1rem .5rem; }
+.badge.mitre { color: var(--accent); border-color: var(--line); }
+.tags { display: flex; flex-wrap: wrap; gap: .25rem .4rem; align-items: baseline; }
+.tag { font: 400 .84rem/1.7 'DM Sans', sans-serif; color: var(--tag-text); background: transparent; border: 0; border-radius: 0; padding: 0; }
+.tag:not(:last-child)::after { content: ' /'; color: #7f978c; margin-left: .3rem; }
+
+/* Infrastructure earns the first prominent project treatment. */
+.infra-card {
+  display: block; position: relative; overflow: hidden;
+  border: 1px solid var(--line);
+  border-left: 3px solid #86b8a9;
+  border-radius: 3px;
+  background: linear-gradient(125deg, #22322f 0%, #1d2927 62%, #1b2725 100%);
+  padding: clamp(1.35rem, 3vw, 2.2rem);
+  transition: background-color .2s, border-color .2s;
+}
+.infra-card:hover { border-color: #67968a; border-left-color: var(--accent-strong); }
+.project-kicker { color: var(--accent); font: 500 .75rem/1.7 'DM Mono',monospace; letter-spacing: .08em; text-transform: uppercase; }
+.infra-card .card-header { margin: .85rem 0 .7rem; }
+.infra-card .card-title { font-size: clamp(1.32rem, 2.4vw, 1.75rem); }
+.infra-card p { font-size: 1rem; }
+
+/* Reports are editorial entries, not a grid of identical dashboards. */
+#dynamic-hunts { border-bottom: 1px solid var(--line-soft); }
+#dynamic-hunts .card {
+  display: block; padding: 1.5rem .8rem 1.6rem;
+  border-top: 1px solid var(--line-soft);
+  transition: background-color .18s ease, padding-left .18s ease, border-color .18s ease;
+}
+#dynamic-hunts .card:hover { background-color: rgba(146,194,177,.055); border-color: var(--accent); padding-left: 1rem; }
+#dynamic-hunts .card-header { margin: 0 0 .56rem; }
+#dynamic-hunts .card-title { font-size: clamp(1.2rem, 2vw, 1.4rem); }
+#dynamic-hunts .card p { font-size: .96rem; margin-bottom: .65rem; }
+#additional-hunts { display: flex; flex-direction: column; gap: 0; }
+#additional-hunts:empty { display: none; }
+.loading-state { color: var(--muted); font: 400 .8rem/1.7 'DM Mono', monospace; }
+
+/* Applied engineering: dramatic enough to be memorable, but consistent with the site. */
+#kinematics-project {
+  display: block;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: linear-gradient(180deg, #212d2d 0%, #1b2424 100%);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color .2s;
+}
+#kinematics-project:hover { transform: none; border-color: #6e9088; }
+.goalie-overview { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.6rem; margin-bottom: 1.25rem; }
+.goalie-overview > div { flex: 1 1 430px; min-width: 0; }
+.goalie-title-row { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-bottom: .8rem; }
+.goalie-title-row h3 { margin: 0; color: var(--cream); font: 600 clamp(1.52rem, 2.6vw, 2.05rem)/1.3 'DM Sans', sans-serif; letter-spacing: -.025em; }
+.goalie-privacy { color: #c0cfc4; font: 500 .68rem/1.4 'DM Mono', monospace; letter-spacing: .04em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 2px; padding: .25rem .45rem; }
+#kinematics-project .goalie-summary { margin: 0; color: var(--text); font: 400 1rem/1.74 'DM Sans', sans-serif; max-width: 810px; }
+#kinematics-project .goalie-summary strong { color: var(--cream); font-weight: 600; }
+#toggleKinematicsBtn,
+#shootPuckBtn {
+  appearance: none; background: #bdd8cf; color: #162726;
+  border: 1px solid #d8ebe5; border-radius: 3px;
+  padding: .78rem 1.25rem; font: 700 .84rem/1.4 'DM Sans',sans-serif;
+  cursor: pointer; transition: background-color .16s,border-color .16s;
+  box-shadow: none;
+}
+#toggleKinematicsBtn {
+  display: inline-flex; align-items: center; gap: .55rem; margin-top: .1rem; flex: 0 0 auto;
+  background: #bdd8cf !important;
+  border-color: #d8ebe5 !important;
+}
+#toggleKinematicsBtn:hover { background: #cae1d9 !important; border-color: #e4f0ec !important; }
+#shootPuckBtn:hover { background: #cae1d9; border-color: #e4f0ec; }
+.goalie-stack { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1.2rem 0 .15rem; border-top: 1px solid var(--line-soft); }
+.goalie-stack span { font: 500 .77rem/1.45 'DM Mono',monospace; border: 1px solid #445b57; color: #cfddd7; padding: .3rem .55rem; border-radius: 2px; background: #263433; }
+#kinematicsDrawer { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.goalie-instructions { font: 400 .81rem/1.7 'DM Mono',monospace; color: #c6d6cf; }
+.rink-container {
+  position: relative;
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 5px solid #435b60;
+  border-radius: 11px;
+  background: #e6f0f4;
+  box-shadow: 0 12px 26px rgba(0,0,0,.15);
+  cursor: crosshair;
+}
+#goalieCanvas { display: block; width: 100%; height: auto; touch-action: none; }
+.mobile-stick-readout { display: none; }
+#kinematics-project .telemetry-hud {
+  position: absolute; top: 12px; left: 16px;
+  font: 500 12px/1.62 'DM Mono',monospace; color: #304d58;
+  pointer-events: none; background: rgba(246,250,252,.92);
+  padding: 8px 12px; border-radius: 6px; border: 1px solid #98b4be; display: block;
+}
+.telemetry-hud > div { white-space: nowrap; }
+#kinematics-project .telemetry-controls { color: #d9e5e0; }
+#kinematics-project #goalieLatencySelect { background: #f4f9fb !important; border-color: #7f9fa9 !important; color: #17313a !important; border-radius: 3px !important; }
+#kinematics-project input[type=range],#kinematics-project input[type=checkbox] { accent-color: #8eb8c3 !important; }
+
+/* Technical background occupies little real estate but retains substance. */
+.skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.5rem; }
+.skill-card { padding: 1rem 0 .2rem; border-top: 1px solid var(--line-soft); }
+.skill-title { color: var(--accent); font: 500 .75rem/1.5 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .8rem; }
+.skill-card .tags { align-items: flex-start; }
+.skill-card .tag { color: #d0ddd4; font-size: .85rem; }
+
+@media (max-width: 760px) {
+  body { padding-left: 1.4rem; padding-right: 1.4rem; padding-bottom: 4rem; }
+  header { padding-top: 1.9rem; padding-bottom: 2rem; }
+  h1 { font-size: clamp(3.6rem, 10.5vw, 5.4rem); }
+  .credentials { gap: 1rem; }
+  .credential + .credential { padding-left: 1rem; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: clamp(3.05rem, 12vw, 4.8rem); }
+  .subtitle { font-size: .91rem; }
+  header > p { font-size: 1rem; }
+  .links { gap: .65rem 1.2rem; }
+  .links a { font-size: .85rem; }
+  .credentials { grid-template-columns: 1fr; gap: 1rem; margin-top: 1.7rem; }
+  .credential + .credential { border-left: 0; border-top: 1px solid var(--line-soft); padding: .95rem 0 0; }
+  h2 { gap: .7rem; font-size: 2.2rem; }
+  h2::before { font-size: .6rem; }
+  .card-header { flex-wrap: wrap; }
+  .infra-card .card-title { font-size: 1.3rem; }
+  #dynamic-hunts .card-title { font-size: 1.19rem; }
+  .goalie-title-row h3 { font-size: 1.62rem; }
+  #kinematics-project { padding: 1rem; }
+  #kinematics-project .telemetry-hud {
+    position: static !important;
+    order: -1 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border: 0 !important;
+    border-bottom: 1px solid #9ab1ba !important;
+    border-radius: 0 !important;
+    padding: 11px 12px !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+    overflow: visible !important;
+  }
+  .telemetry-hud > div {
+    width: 100%;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+  .rink-container { display: flex !important; flex-direction: column !important; }
+  .mobile-stick-readout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    max-width: 740px;
+    margin: .45rem auto 0;
+    color: #d2e0dc;
+    font: 500 .72rem/1.5 'DM Mono', monospace;
+  }
+  .mobile-stick-readout strong { color: #b7d8cc; font-weight: 500; white-space: nowrap; }
+  .telemetry-controls,.telemetry-controls-group { flex-direction: column !important; align-items: stretch !important; gap: 12px !important; width: 100%; }
+  .telemetry-control-row { display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  .telemetry-control-select { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
+  #goalieLatencySelect { max-width: 100%; width: 100%; }
+  #shootPuckBtn { width: 100%; text-align: center; }
+  .skills-grid { grid-template-columns: 1fr; gap: .65rem; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .links a,#kinematics-project,#toggleKinematicsBtn,#shootPuckBtn { transition: none; } }
+
+@media (max-width: 355px) {
+  .mobile-stick-readout { flex-wrap: wrap; gap: .25rem .6rem; }
+}

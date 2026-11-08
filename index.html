@@ -54,382 +54,206 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #090d16;
-      --card-bg: rgba(18, 26, 43, 0.7);
-      --card-hover: rgba(28, 39, 64, 0.85);
-      --border: rgba(56, 75, 112, 0.35);
-      --border-hover: rgba(88, 166, 255, 0.6);
-      --text: #94a3b8;
-      --text-bright: #f8fafc;
-      --accent: #38bdf8;
-      --accent-dim: rgba(56, 189, 248, 0.12);
-      --tag-bg: #1e293b;
-      --tag-text: #cbd5e1;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
-      background-attachment: fixed;
-      color: var(--text);
-      line-height: 1.6;
-      padding: 4rem 1.5rem;
-      min-height: 100vh;
-    }
-    .container { max-width: 840px; margin: 0 auto; }
-    
-    header { 
-      margin-bottom: 3rem; 
-      border-bottom: 1px solid var(--border); 
-      padding-bottom: 2rem; 
-    }
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      color: var(--accent);
-      background: var(--accent-dim);
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      margin-bottom: 1.25rem;
-    }
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      background-color: #22c55e;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #22c55e;
-    }
-    h1 { 
-      color: var(--text-bright); 
-      font-size: 2.4rem; 
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.25rem; 
-    }
-    .subtitle { 
-      font-size: 1.1rem;
-      color: #cbd5e1; 
-      font-weight: 400; 
-      margin-bottom: 1rem; 
-    }
-    header p {
-      font-size: 0.975rem;
-      color: var(--text);
-      max-width: 680px;
-    }
-    .links {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .links a { 
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--text-bright); 
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      text-decoration: none; 
-      font-size: 0.85rem; 
-      font-weight: 500;
-      padding: 0.4rem 0.9rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    .links a:hover { 
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-    
-    h2 { 
-      color: var(--text-bright); 
-      font-size: 1.15rem; 
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600; 
-      margin: 3rem 0 1.25rem; 
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    h2::before { 
-      content: '//'; 
-      color: var(--accent); 
-      font-family: 'Fira Code', monospace; 
-    }
-    
-    .grid { display: flex; flex-direction: column; gap: 1.25rem; }
-    .card {
-      display: block;
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.4rem;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .card:hover { 
-      border-color: var(--border-hover); 
-      background: var(--card-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-    }
-    .card-header { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: flex-start; 
-      margin-bottom: 0.6rem; 
-      gap: 1rem;
-    }
-    .card-title { 
-      color: var(--text-bright); 
-      font-weight: 600; 
-      font-size: 1.1rem; 
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .card-title .arrow {
-      color: var(--accent);
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s ease;
-    }
-    .card:hover .card-title .arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .badge {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.7rem;
-      font-weight: 500;
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      background: rgba(34, 197, 94, 0.15);
-      color: #4ade80;
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      white-space: nowrap;
-    }
-    .badge.mitre {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-    .card p { 
-      font-size: 0.9rem; 
-      color: var(--text); 
-      margin-bottom: 1.1rem; 
-      line-height: 1.55;
-    }
-    .tags { display: flex; gap: 0.45rem; flex-wrap: wrap; }
-    .tag {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.75rem;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .loading-state {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.85rem;
-      color: var(--tag-text);
-      padding: 1.5rem;
-      background: var(--card-bg);
-      border: 1px dashed var(--border);
-      border-radius: 8px;
-    }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-    .skill-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-    }
-    .skill-title {
-      font-size: 0.85rem;
-      color: var(--accent);
-      font-weight: 600;
-      font-family: 'Fira Code', monospace;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-    }
-    #kinematics-project:hover { transform: none; }
-
-    /* Desktop Telemetry HUD (Floating Overlay in Corner) */
-    .telemetry-hud {
-      position: absolute;
-      top: 12px;
-      left: 16px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 11px;
-      color: #38bdf8;
-      line-height: 1.65;
-      pointer-events: none;
-      background: rgba(2, 6, 23, 0.84);
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      cursor: default;
-      display: block;
-    }
-
-    .telemetry-hud > div {
-      white-space: nowrap;
-    }
-
-    /* Mobile Responsive Optimizations */
-    @media (max-width: 640px) {
-      #kinematics-project {
-        padding: 16px !important;
-      }
-
-      .rink-container {
-        display: flex !important;
-        flex-direction: column !important;
-      }
-
-      /* Mobile Telemetry Bar: Full width, stacked 4 lines, zero truncation, zero jumping */
-      .telemetry-hud {
-        position: static !important;
-        order: -1 !important;
-        width: 100% !important;
-        height: 76px !important;
-        min-height: 76px !important;
-        max-height: 76px !important;
-        border: none !important;
-        border-bottom: 1px solid #334155 !important;
-        border-radius: 0 !important;
-        background: #020617 !important;
-        padding: 6px 10px !important;
-        font-size: 9px !important;
-        line-height: 1.35 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-      }
-
-      .telemetry-hud > div {
-        width: 100% !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: clip !important;
-      }
-
-      .telemetry-controls {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 12px !important;
-      }
-      .telemetry-controls-group {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 12px !important;
-        width: 100% !important;
-      }
-      .telemetry-control-row {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-      }
-      .telemetry-control-select {
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 6px !important;
-      }
-      #goalieLatencySelect {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      #shootPuckBtn {
-        width: 100% !important;
-        text-align: center !important;
-        padding: 10px 0 !important;
-      }
-    }
-      #additional-hunts {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-      }
-      #additional-hunts:empty {
-        display: none;
-      }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="status-badge">
-        <span class="status-dot"></span> Open to IT, Engineering, & Security Roles
-      </div>
-      <h1>Gabe (Gabriel) U. Concepcion</h1>
-      <div class="subtitle">Systems Troubleshooting • Cybersecurity • Software Engineering</div>
+      <div class="status-badge"><span class="status-dot"></span> Open to IT, Engineering, &amp; Security Roles</div>
+      <h1>Gabe U.<br>Concepcion</h1>
+      <div class="subtitle">Systems Troubleshooting <span>·</span> Cybersecurity <span>·</span> Software Engineering</div>
       <p>I investigate complex technical problems, build software-driven solutions, and explore how systems behave under real-world conditions. My work spans Windows and hardware diagnostics, network troubleshooting, security telemetry analysis, and computer vision engineering.</p>
-      
-      <div class="links">
-        <a href="https://www.linkedin.com/in/gabe-concepcion/" target="_blank" rel="noopener">LinkedIn Profile ↗</a>
-        <a href="https://github.com/GabeConcepcion" target="_blank" rel="noopener">GitHub Profile ↗</a>
-        <a href="https://github.com/GabeConcepcion/Threat-Hunting-Reports" target="_blank" rel="noopener">Threat Hunting Repo ↗</a>
-        <a href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">Honeypot Project ↗</a>
-        <a href="#kinematics-project" id="headerDemoLink" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.14); color: #38bdf8; font-weight: 600;">★ Live Demo: Goalie Vision Engine ↓</a>
+
+      <div class="links" aria-label="External profiles and projects">
+        <a href="https://www.linkedin.com/in/gabe-concepcion/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/GabeConcepcion" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/GabeConcepcion/Threat-Hunting-Reports" target="_blank" rel="noopener">Threat Hunting Repo <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">Honeypot Project <span aria-hidden="true">↗</span></a>
+        <a href="#kinematics-project" id="headerDemoLink">Live Goalie Demo <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <div class="credentials" aria-label="Education and certifications">
+        <div class="credential">
+          <span class="credential-label">Education</span>
+          <strong>B.S. Software Engineering</strong>
+          <span class="credential-detail">Western Governors University <span aria-hidden="true">·</span> April 2026</span>
+        </div>
+        <div class="credential">
+          <span class="credential-label">Certifications</span>
+          <strong>CompTIA Project+ <span aria-hidden="true">·</span> AWS Cloud Practitioner <span aria-hidden="true">·</span> ITIL 4</strong>
+          <span class="credential-detail">CompTIA Security+ — in progress</span>
+        </div>
       </div>
     </header>
 
-    <!-- SECTION 1: CERTIFICATIONS & EDUCATION -->
-    <h2>Education & Certifications</h2>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-title">Education</div>
-        <p style="font-size: 0.95rem; color: var(--text-bright); font-weight: 500; margin-top: 0.35rem;">
-          Bachelor of Science in Software Engineering
-        </p>
-        <p style="font-size: 0.85rem; color: var(--text); margin-top: 0.2rem;">
-          Western Governors University • Graduated April 2026
-        </p>
-      </div>
+<!-- SECTION 3: HANDS-ON INFRASTRUCTURE -->
+    <h2>Systems &amp; Security</h2>
+    <div class="grid">
+      <a class="card infra-card" href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">
+        <div class="project-kicker">Infrastructure / Azure / Security telemetry</div>
+        <div class="card-header">
+          <span class="card-title">Cloud Honeypot Deployment & Log Ingestion <span class="arrow">→</span></span>
+          <span class="badge">Completed</span>
+        </div>
+        <p>Configured an exposed Windows VM environment in Azure, managing network security group (NSG) rules to ingest raw authentication failure logs (Event ID 4625) into Log Analytics and build analytical query dashboards in Microsoft Sentinel.</p>
+        <div class="tags">
+          <span class="tag">Azure Virtual Machines</span>
+          <span class="tag">Network Security Groups</span>
+          <span class="tag">Log Analytics Workspace</span>
+          <span class="tag">KQL</span>
+        </div>
+      </a>
+    </div>
 
-      <div class="skill-card">
-        <div class="skill-title">Certifications</div>
-        <div class="tags" style="margin-top: 0.5rem;">
-          <span class="tag">CompTIA Security+ (WIP)</span>
-          <span class="tag">CompTIA Project+</span>
-          <span class="tag">AWS Cloud Practitioner</span>
-          <span class="tag">ITIL 4</span>
+    <!-- SECTION 5: DYNAMIC INVESTIGATIONS & REPORTS -->
+
+<h2>Technical Investigations</h2>
+<div id="dynamic-hunts" class="grid">
+
+  <a class="card report-card"
+     href="https://github.com/GabeConcepcion/Threat-Hunting-Reports/blob/main/Dissecting-RDP-Compromise.md"
+     target="_blank" rel="noopener"
+     data-report-name="Dissecting-RDP-Compromise.md">
+    <div class="card-header">
+      <span class="card-title">
+        Dissecting RDP Compromise &amp; Lateral Movement
+        <span class="arrow">→</span>
+      </span>
+      <span class="badge mitre">T1021.001</span>
+    </div>
+    <p>
+      Analysis of external RDP exposure, network authentication
+      diagnostics, and session traversal using Windows Security
+      Event IDs 4624/4625 (Logon Type 10) and client connection logs.
+    </p>
+    <div class="tags">
+      <span class="tag">Remote Desktop (RDP)</span>
+      <span class="tag">Windows Event 4624 Type 10</span>
+      <span class="tag">Lateral Movement</span>
+      <span class="tag">KQL</span>
+    </div>
+  </a>
+
+  <a class="card report-card"
+     href="https://github.com/GabeConcepcion/Threat-Hunting-Reports/blob/main/Finance-User-Breach.md"
+     target="_blank" rel="noopener"
+     data-report-name="Finance-User-Breach.md">
+    <div class="card-header">
+      <span class="card-title">
+        Finance Department Targeted User Compromise
+        <span class="arrow">→</span>
+      </span>
+      <span class="badge mitre">T1566 / T1078</span>
+    </div>
+    <p>
+      Troubleshooting and forensic investigation of an identity
+      breach involving phishing, anomalous account sign-ins,
+      and permission auditing in enterprise identity environments.
+    </p>
+    <div class="tags">
+      <span class="tag">Active Directory / Entra ID</span>
+      <span class="tag">Phishing Analysis</span>
+      <span class="tag">Account Permissions</span>
+      <span class="tag">Log Analysis</span>
+    </div>
+  </a>
+
+  <div id="additional-hunts"></div>
+</div>
+
+
+<!-- SECTION 4: APPLIED SYSTEMS & HARDWARE ENGINEERING -->
+    <h2>Applied Engineering</h2>
+    <div class="grid">
+      <div class="card" id="kinematics-project">
+        <!-- Editorial presentation: interactive simulation internals unchanged -->
+        <div class="goalie-overview">
+          <div>
+            <div class="goalie-title-row">
+              <h3>
+                Autonomous Computer Vision & Goalie Kinematics Engine
+              </h3>
+              <span class="goalie-privacy">
+                Proprietary / Closed Source
+              </span>
+            </div>
+            <p class="goalie-summary">
+              Engineered a real-time autonomous defensive pipeline ingesting live HDMI capture card feeds (UVC). Curated, annotated, and trained a custom <strong>YOLO object detection model</strong> to track high-speed puck dynamics under strict frame latency budgets. Implemented 2D vector extrapolation, predictive angle bisection, and programmatic controller emulation to actuate analog defensive positioning in real time. Embedded below is a basic simulation of the project.
+            </p>
+          </div>
+          
+          <!-- Interactive Toggle Trigger -->
+          <button type="button" id="toggleKinematicsBtn">
+            <span id="toggleIcon">▶</span> <span id="toggleText">Launch Interactive Simulation</span>
+          </button>
+        </div>
+
+        <!-- Tech Stack Tags -->
+        <div class="goalie-stack">
+          <span>Custom YOLO Model</span>
+          <span>Python</span>
+          <span>OpenCV</span>
+          <span>HDMI Video Capture (UVC)</span>
+          <span>Predictive Kinematics</span>
+          <span>Virtual HID Controller Emulation</span>
+        </div>
+
+        <!-- Collapsible Simulation Sandbox Drawer -->
+        <div id="kinematicsDrawer" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <span class="goalie-instructions">
+              INTERACTIVE SIMULATION — Move your cursor to steer the puck carrier; click the rink to shoot. On touchscreens, drag to aim and release to shoot.
+            </span>
+          </div>
+
+          <!-- Rink Canvas Container -->
+          <div class="rink-container">
+            <canvas id="goalieCanvas" width="740" height="490" style="width: 100%; height: auto; display: block;"></canvas>
+            
+            <!-- Telemetry HUD: Floating on Desktop, Stacked Bar on Mobile -->
+            <div class="telemetry-hud">
+              <div>GOALIE STATE: <span id="hud-status" style="color: #1f6b58; font-weight: 700;">SHADOWING CARRIER</span></div>
+              <div>PUCK DATA: <span id="hud-vel" style="color: #17313a;">0.0 px/f</span></div>
+              <div>CREASE TARGET: <span id="hud-intercept" style="color: #17313a;">--</span></div>
+              <div>SAVE EFFICIENCY: <span id="hud-saves" style="color: #1f6b58;">0</span> / <span id="hud-shots">0</span> (<span id="hud-pct">100%</span>)</div>
+            </div>
+          </div>
+          <div class="mobile-stick-readout" aria-label="Virtual controller output">
+            <span>VIRTUAL CONTROLLER · LEFT STICK</span>
+            <strong id="hud-stick">X 0.00 / Y 0.00</strong>
+          </div>
+
+          <!-- Interactive Telemetry Controls -->
+          <div class="telemetry-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: 13px; color: #d9e5e0;">
+            <div class="telemetry-controls-group" style="display: flex; gap: 18px; align-items: center; flex-wrap: wrap;">
+              <label class="telemetry-control-row" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>Shot Velocity:</span>
+                <input type="range" id="puckSpeedSlider" min="7" max="17" value="11" style="accent-color: #8eb8c3; cursor: pointer;">
+              </label>
+              <label class="telemetry-control-select" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>Capture Pipeline:</span>
+                <select id="goalieLatencySelect" style="background: #f4f9fb; color: #17313a; border: 1px solid #7f9fa9; border-radius: 6px; padding: 4px 10px; cursor: pointer;">
+                  <option value="16" selected>16 ms (Capture Card + OpenCV)</option>
+                  <option value="85">85 ms (Standard Software Grab)</option>
+                  <option value="200">200 ms (High Latency Stress Test)</option>
+                </select>
+              </label>
+              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="autoFireToggle" style="accent-color: #8eb8c3; cursor: pointer;">
+                <span>Auto-Fire Barrage</span>
+              </label>
+            </div>
+            <button type="button" id="shootPuckBtn">
+              Shoot Puck
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- SECTION 2: CORE TECHNICAL COMPETENCIES -->
-    <h2>Technical Competencies & Systems</h2>
+    <h2>Technical Background</h2>
     <div class="skills-grid">
       <div class="skill-card">
         <div class="skill-title">Systems & Administration</div>
@@ -466,167 +290,7 @@
       </div>
     </div>
 
-    <!-- SECTION 3: HANDS-ON INFRASTRUCTURE -->
-    <h2>Infrastructure & Systems Labs</h2>
-    <div class="grid">
-      <a class="card" href="https://github.com/GabeConcepcion/Honeypot-Report" target="_blank" rel="noopener">
-        <div class="card-header">
-          <span class="card-title">Cloud Honeypot Deployment & Log Ingestion <span class="arrow">→</span></span>
-          <span class="badge">Completed</span>
-        </div>
-        <p>Configured an exposed Windows VM environment in Azure, managing network security group (NSG) rules to ingest raw authentication failure logs (Event ID 4625) into Log Analytics and build analytical query dashboards in Microsoft Sentinel.</p>
-        <div class="tags">
-          <span class="tag">Azure Virtual Machines</span>
-          <span class="tag">Network Security Groups</span>
-          <span class="tag">Log Analytics Workspace</span>
-          <span class="tag">KQL</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- SECTION 4: APPLIED SYSTEMS & HARDWARE ENGINEERING -->
-    <h2>Applied Systems & Engineering</h2>
-    <div class="grid">
-      <div class="card" id="kinematics-project" style="background: #0b0f19; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; transition: border-color 0.2s; cursor: default;">
-        <!-- Header & Metadata Row -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px;">
-              <h3 style="margin: 0; font-size: 19px; color: #f8fafc; font-weight: 700;">
-                Autonomous Computer Vision & Goalie Kinematics Engine
-              </h3>
-              <span style="background: rgba(148, 163, 184, 0.1); border: 1px solid #475569; color: #94a3b8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; text-transform: uppercase;">
-                Proprietary / Closed Source
-              </span>
-            </div>
-            <p style="margin: 0; font-size: 14px; color: #94a3b8; max-width: 780px; line-height: 1.6;">
-              Engineered a real-time autonomous defensive pipeline ingesting live HDMI capture card feeds (UVC). Curated, annotated, and trained a custom <strong style="color: #f8fafc;">YOLO object detection model</strong> to track high-speed puck dynamics under strict frame latency budgets. Implemented 2D vector extrapolation, predictive angle bisection, and programmatic controller emulation to actuate analog defensive positioning in real time. Embedded below is a basic simulation of the project.
-            </p>
-          </div>
-          
-          <!-- Interactive Toggle Trigger -->
-          <button type="button" id="toggleKinematicsBtn" style="background: #0284c7; color: #ffffff; border: 1px solid #38bdf8; border-radius: 6px; padding: 8px 16px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);">
-            <span id="toggleIcon">▶</span> <span id="toggleText">Launch Interactive Telemetry</span>
-          </button>
-        </div>
-
-        <!-- Tech Stack Tags -->
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
-          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Custom YOLO Model</span>
-          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Python</span>
-          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">OpenCV</span>
-          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">HDMI Video Capture (UVC)</span>
-          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Predictive Kinematics</span>
-          <span style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.4); color: #cbd5e1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: 600;">Virtual HID Controller Emulation</span>
-        </div>
-
-        <!-- Collapsible Simulation Sandbox Drawer -->
-        <div id="kinematicsDrawer" style="display: none; margin-top: 20px; border-top: 1px solid #1e293b; padding-top: 20px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-            <span style="font-size: 12px; color: #94a3b8; font-family: monospace;">
-              [+] TELEMETRY BENCH: Move cursor over offensive zone to steer carrier, click anywhere to shoot.
-            </span>
-          </div>
-
-          <!-- Rink Canvas Container -->
-          <div class="rink-container" style="position: relative; width: 100%; max-width: 740px; margin: 0 auto; background: #050b14; border: 1px solid #334155; border-radius: 8px; overflow: hidden; cursor: crosshair;">
-            <canvas id="goalieCanvas" width="740" height="490" style="width: 100%; height: auto; display: block;"></canvas>
-            
-            <!-- Telemetry HUD: Floating on Desktop, Stacked Bar on Mobile -->
-            <div class="telemetry-hud">
-              <div>AI STATE: <span id="hud-status" style="color: #4ade80; font-weight: bold;">SHADOWING CARRIER</span></div>
-              <div>PUCK VECTOR: <span id="hud-vel" style="color: #f1f5f9;">0.0 px/f</span></div>
-              <div>CREASE TARGET: <span id="hud-intercept" style="color: #f1f5f9;">--</span></div>
-              <div>SAVE EFFICIENCY: <span id="hud-saves" style="color: #4ade80;">0</span> / <span id="hud-shots">0</span> (<span id="hud-pct">100%</span>)</div>
-            </div>
-          </div>
-
-          <!-- Interactive Telemetry Controls -->
-          <div class="telemetry-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: 13px; color: #cbd5e1;">
-            <div class="telemetry-controls-group" style="display: flex; gap: 18px; align-items: center; flex-wrap: wrap;">
-              <label class="telemetry-control-row" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                <span>Shot Velocity:</span>
-                <input type="range" id="puckSpeedSlider" min="7" max="17" value="11" style="accent-color: #38bdf8; cursor: pointer;">
-              </label>
-              <label class="telemetry-control-select" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                <span>Capture Pipeline:</span>
-                <select id="goalieLatencySelect" style="background: #1e293b; color: #f8fafc; border: 1px solid #475569; border-radius: 6px; padding: 4px 10px; cursor: pointer;">
-                  <option value="16" selected>16 ms (Capture Card + OpenCV)</option>
-                  <option value="85">85 ms (Standard Software Grab)</option>
-                  <option value="200">200 ms (High Latency Stress Test)</option>
-                </select>
-              </label>
-              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                <input type="checkbox" id="autoFireToggle" style="accent-color: #38bdf8; cursor: pointer;">
-                <span>Auto-Fire Barrage</span>
-              </label>
-            </div>
-            <button type="button" id="shootPuckBtn" style="background: #0284c7; color: #ffffff; border: 1px solid #38bdf8; border-radius: 6px; padding: 8px 20px; font-weight: 700; font-size: 13px; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);">
-              Shoot Puck
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 5: DYNAMIC INVESTIGATIONS & REPORTS -->
-
-<h2>Technical Reports & Investigations</h2>
-<div id="dynamic-hunts" class="grid">
-
-  <a class="card"
-     href="https://github.com/GabeConcepcion/Threat-Hunting-Reports/blob/main/Dissecting-RDP-Compromise.md"
-     target="_blank" rel="noopener"
-     data-report-name="Dissecting-RDP-Compromise.md">
-    <div class="card-header">
-      <span class="card-title">
-        Dissecting RDP Compromise &amp; Lateral Movement
-        <span class="arrow">→</span>
-      </span>
-      <span class="badge mitre">T1021.001</span>
-    </div>
-    <p>
-      Analysis of external RDP exposure, network authentication
-      diagnostics, and session traversal using Windows Security
-      Event IDs 4624/4625 (Logon Type 10) and client connection logs.
-    </p>
-    <div class="tags">
-      <span class="tag">Remote Desktop (RDP)</span>
-      <span class="tag">Windows Event 4624 Type 10</span>
-      <span class="tag">Lateral Movement</span>
-      <span class="tag">KQL</span>
-    </div>
-  </a>
-
-  <a class="card"
-     href="https://github.com/GabeConcepcion/Threat-Hunting-Reports/blob/main/Finance-User-Breach.md"
-     target="_blank" rel="noopener"
-     data-report-name="Finance-User-Breach.md">
-    <div class="card-header">
-      <span class="card-title">
-        Finance Department Targeted User Compromise
-        <span class="arrow">→</span>
-      </span>
-      <span class="badge mitre">T1566 / T1078</span>
-    </div>
-    <p>
-      Troubleshooting and forensic investigation of an identity
-      breach involving phishing, anomalous account sign-ins,
-      and permission auditing in enterprise identity environments.
-    </p>
-    <div class="tags">
-      <span class="tag">Active Directory / Entra ID</span>
-      <span class="tag">Phishing Analysis</span>
-      <span class="tag">Account Permissions</span>
-      <span class="tag">Log Analysis</span>
-    </div>
-  </a>
-
-  <div id="additional-hunts"></div>
-</div>
-
-
-  <script>
+      <script>
     /* ========================================================================= */
     /* GOALIE KINEMATICS DRAWER & SIMULATION ENGINE                              */
     /* ========================================================================= */
@@ -645,9 +309,9 @@
       function openTelemetryDrawer() {
         drawer.style.display = 'block';
         toggleIcon.innerText = '✕';
-        toggleText.innerText = 'Close Telemetry';
-        toggleBtn.style.background = '#0f172a';
-        toggleBtn.style.borderColor = '#64748b';
+        toggleText.innerText = 'Close Simulation';
+        toggleBtn.style.background = '#22312f';
+        toggleBtn.style.borderColor = '#6a8a84';
 
         if (!simInitialized) {
           runSimInstance = initKinematicsSimulation();
@@ -664,9 +328,9 @@
       function closeTelemetryDrawer() {
         drawer.style.display = 'none';
         toggleIcon.innerText = '▶';
-        toggleText.innerText = 'Launch Interactive Telemetry';
-        toggleBtn.style.background = '#0284c7';
-        toggleBtn.style.borderColor = '#38bdf8';
+        toggleText.innerText = 'Launch Interactive Simulation';
+        toggleBtn.style.background = '#b9d7cd';
+        toggleBtn.style.borderColor = '#d7ebe4';
 
         if (runSimInstance) {
           runSimInstance.pause();
@@ -711,6 +375,7 @@
         const hudSaves = document.getElementById('hud-saves');
         const hudShots = document.getElementById('hud-shots');
         const hudPct = document.getElementById('hud-pct');
+        const hudStick = document.getElementById('hud-stick');
 
         const W = canvas.width;
         const H = canvas.height;
@@ -866,7 +531,7 @@
 
           if (hudStatus) {
             hudStatus.innerText = puck.isOnTarget ? 'SHOT DETECTED • INTERCEPTING' : 'SHOT WIDE • HOLDING POST';
-            hudStatus.style.color = puck.isOnTarget ? '#38bdf8' : '#f59e0b';
+            hudStatus.style.color = puck.isOnTarget ? '#1c635e' : '#906019';
           }
           if (hudIntercept) {
             hudIntercept.innerText = `(${Math.round(optimalPose.x)}, ${Math.round(optimalPose.y)})`;
@@ -901,7 +566,7 @@
 
             if (hudStatus) {
               hudStatus.innerText = 'SHADOWING PUCK CARRIER';
-              hudStatus.style.color = '#38bdf8';
+              hudStatus.style.color = '#1c635e';
             }
             if (hudVel) hudVel.innerText = 'CARRIER POS LOCKED';
             if (hudIntercept) hudIntercept.innerText = `(${Math.round(shadowPose.x)}, ${Math.round(shadowPose.y)})`;
@@ -928,6 +593,7 @@
           const errY = goalie.targetY - goalie.y;
           goalie.stickLX = Math.max(-1, Math.min(1, errX / 40));
           goalie.stickLY = Math.max(-1, Math.min(1, errY / 30));
+          if (hudStick) hudStick.textContent = `X ${goalie.stickLX.toFixed(2)} / Y ${goalie.stickLY.toFixed(2)}`;
 
           goalie.x += errX * goalie.smoothing;
           goalie.y += errY * goalie.smoothing;
@@ -975,12 +641,12 @@
                 puck.vx = Math.cos(reboundAngle) * reboundSpeed;
                 puck.vy = Math.sin(reboundAngle) * reboundSpeed;
 
-                ripples.push({ x: puck.x, y: puck.y, r: 8, alpha: 0.9, color: '#4ade80' });
+                ripples.push({ x: puck.x, y: puck.y, r: 8, alpha: 0.9, color: '#2e8872' });
 
                 if (hudSaves) hudSaves.innerText = totalSaves;
                 if (hudStatus) {
                   hudStatus.innerText = 'SAVE • TRACKING REBOUND';
-                  hudStatus.style.color = '#4ade80';
+                  hudStatus.style.color = '#1d6b55';
                 }
               }
             }
@@ -991,10 +657,10 @@
               puck.vy = -Math.abs(puck.vy) * 0.6;
               puck.vx *= 1.1;
               puck.state = 'rebound';
-              ripples.push({ x: puck.x, y: puck.y, r: 6, alpha: 0.9, color: '#f59e0b' });
+              ripples.push({ x: puck.x, y: puck.y, r: 6, alpha: 0.9, color: '#b98940' });
               if (hudStatus) {
                 hudStatus.innerText = 'POST DEFLECTION • TRACKING LOOSE PUCK';
-                hudStatus.style.color = '#f59e0b';
+                hudStatus.style.color = '#906019';
               }
             }
 
@@ -1004,17 +670,17 @@
                 puck.resetCooldown = 55;
                 puck.vx *= 0.22;
                 puck.vy *= 0.22;
-                ripples.push({ x: puck.x, y: goalLineY, r: 10, alpha: 1.0, color: '#ef4444' });
+                ripples.push({ x: puck.x, y: goalLineY, r: 10, alpha: 1.0, color: '#cc6262' });
                 if (hudStatus) {
                   hudStatus.innerText = 'GOAL CONCEDED • RESETTING CREASE';
-                  hudStatus.style.color = '#ef4444';
+                  hudStatus.style.color = '#ae4040';
                 }
               } else if (puck.y > goalLineY + 22) {
                 puck.vy = -Math.abs(puck.vy) * 0.5;
                 puck.state = 'rebound';
                 if (hudStatus) {
                   hudStatus.innerText = 'END-BOARD REBOUND • TRACKING';
-                  hudStatus.style.color = '#94a3b8';
+                  hudStatus.style.color = '#435e68';
                 }
               }
             }
@@ -1043,10 +709,14 @@
         }
 
         function drawRink() {
-          ctx.fillStyle = '#050b14';
+          const iceGrad = ctx.createLinearGradient(0, 0, 0, H);
+          iceGrad.addColorStop(0, '#f3f8fa');
+          iceGrad.addColorStop(0.55, '#e6f0f4');
+          iceGrad.addColorStop(1, '#dbe9ee');
+          ctx.fillStyle = iceGrad;
           ctx.fillRect(0, 0, W, H);
 
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+          ctx.strokeStyle = 'rgba(33, 57, 66, 0.05)';
           ctx.lineWidth = 1;
           for (let x = 0; x <= W; x += 40) {
             ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
@@ -1055,28 +725,34 @@
             ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
           }
 
-          ctx.fillStyle = 'rgba(56, 189, 248, 0.28)';
-          ctx.fillRect(0, 42, W, 5);
+          ctx.fillStyle = '#dbeaf1';
+          ctx.fillRect(0, 0, W, 22);
+          ctx.fillRect(0, H - 14, W, 14);
+          ctx.fillRect(0, 0, 10, H);
+          ctx.fillRect(W - 10, 0, 10, H);
 
-          ctx.strokeStyle = 'rgba(239, 68, 68, 0.16)';
+          ctx.fillStyle = 'rgba(76, 157, 197, 0.38)';
+          ctx.fillRect(0, 42, W, 6);
+
+          ctx.strokeStyle = 'rgba(202, 73, 73, 0.28)';
           ctx.lineWidth = 1.5;
           [155, W - 155].forEach(cx => {
             ctx.beginPath(); ctx.arc(cx, 195, 68, 0, Math.PI * 2); ctx.stroke();
-            ctx.fillStyle = 'rgba(239, 68, 68, 0.35)';
-            ctx.beginPath(); ctx.arc(cx, 195, 5, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = 'rgba(202, 73, 73, 0.42)';
+            ctx.beginPath(); ctx.arc(cx, 195, 4.5, 0, Math.PI * 2); ctx.fill();
           });
 
-          ctx.fillStyle = 'rgba(56, 189, 248, 0.14)';
+          ctx.fillStyle = 'rgba(122, 190, 218, 0.30)';
           ctx.beginPath();
           ctx.arc(W / 2, goalLineY, creaseRadius, Math.PI, 0, false);
           ctx.fill();
-          ctx.strokeStyle = 'rgba(239, 68, 68, 0.75)';
+          ctx.strokeStyle = 'rgba(204, 72, 72, 0.75)';
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+          ctx.fillStyle = 'rgba(246, 249, 251, 0.92)';
           ctx.fillRect(netLeft, goalLineY, netWidth, netDepth);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+          ctx.strokeStyle = 'rgba(126, 143, 152, 0.34)';
           ctx.lineWidth = 1;
           for (let x = netLeft; x <= netRight; x += 10) {
             ctx.beginPath(); ctx.moveTo(x, goalLineY); ctx.lineTo(x, goalLineY + netDepth); ctx.stroke();
@@ -1085,20 +761,20 @@
             ctx.beginPath(); ctx.moveTo(netLeft, y); ctx.lineTo(netRight, y); ctx.stroke();
           }
 
-          ctx.strokeStyle = '#ef4444';
+          ctx.strokeStyle = '#ce5353';
           ctx.lineWidth = 2.5;
           ctx.beginPath(); ctx.moveTo(0, goalLineY); ctx.lineTo(W, goalLineY); ctx.stroke();
           ctx.lineWidth = 3;
           ctx.strokeRect(netLeft, goalLineY, netWidth, netDepth);
 
-          ctx.fillStyle = '#f87171';
+          ctx.fillStyle = '#d85f5f';
           ctx.beginPath(); ctx.arc(netLeft, goalLineY, postRadius, 0, Math.PI * 2); ctx.fill();
           ctx.beginPath(); ctx.arc(netRight, goalLineY, postRadius, 0, Math.PI * 2); ctx.fill();
         }
 
         function drawVisionOverlays() {
           if (puck.state !== 'scored') {
-            ctx.fillStyle = 'rgba(56, 189, 248, 0.05)';
+            ctx.fillStyle = 'rgba(52, 122, 145, 0.05)';
             ctx.beginPath();
             ctx.moveTo(puck.x, puck.y);
             ctx.lineTo(netLeft, goalLineY);
@@ -1106,7 +782,7 @@
             ctx.closePath();
             ctx.fill();
 
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.18)';
+            ctx.strokeStyle = 'rgba(58, 119, 141, 0.24)';
             ctx.lineWidth = 1;
             ctx.setLineDash([4, 4]);
             ctx.beginPath();
@@ -1117,7 +793,7 @@
           }
 
           if (puck.state === 'inbound' && puck.rayPoints.length >= 2) {
-            ctx.strokeStyle = puck.isOnTarget ? 'rgba(56, 189, 248, 0.7)' : 'rgba(245, 158, 11, 0.45)';
+            ctx.strokeStyle = puck.isOnTarget ? 'rgba(44, 113, 136, 0.70)' : 'rgba(183, 126, 54, 0.55)';
             ctx.lineWidth = 1.8;
             ctx.beginPath();
             ctx.moveTo(puck.x, puck.y);
@@ -1127,7 +803,7 @@
             ctx.stroke();
           }
 
-          ctx.strokeStyle = '#4ade80';
+          ctx.strokeStyle = '#2b6c62';
           ctx.lineWidth = 1.4;
           ctx.beginPath();
           ctx.arc(goalie.targetX, goalie.targetY, 6, 0, Math.PI * 2);
@@ -1139,13 +815,15 @@
           const bx = puck.x - boxSize / 2;
           const by = puck.y - boxSize / 2;
 
-          ctx.strokeStyle = '#4ade80';
+          ctx.strokeStyle = '#2b6c62';
           ctx.lineWidth = 1.5;
           ctx.strokeRect(bx, by, boxSize, boxSize);
 
-          ctx.fillStyle = '#4ade80';
-          ctx.font = 'bold 9px ui-monospace, SFMono-Regular, Menlo, monospace';
-          ctx.fillText(`PUCK ${puck.conf}% [${Math.round(puck.x)},${Math.round(puck.y)}]`, bx + 28, by + 10);
+          ctx.fillStyle = '#2b6c62';
+          if (canvas.clientWidth > 500) {
+            ctx.font = 'bold 11px ui-monospace, SFMono-Regular, Menlo, monospace';
+            ctx.fillText(`PUCK ${puck.conf}% [${Math.round(puck.x)},${Math.round(puck.y)}]`, bx + 28, by + 10);
+          }
         }
 
         function drawGoalie(gx, gy, angle) {
@@ -1153,59 +831,106 @@
           ctx.translate(gx, gy);
           ctx.rotate(angle);
 
-          const padW = 16;
-          const padH = 24;
-          const spread = goalie.isButterfly ? 23 : 16;
+          const spread = goalie.isButterfly ? 24 : 17;
+          const colors = {
+            shell: '#f8fbfd', edge: '#617d88', dark: '#1d4351',
+            jersey: '#2b5966', stripe: '#82bac4', blade: '#344e59',
+            wood: '#b69b72'
+          };
 
-          ctx.fillStyle = '#f8fafc';
-          ctx.strokeStyle = '#0284c7';
-          ctx.lineWidth = 2;
+          // Ground shadow gives the flat drawing a sense of weight on the ice.
+          ctx.fillStyle = 'rgba(27, 63, 77, 0.17)';
           ctx.beginPath();
-          ctx.roundRect(-spread - padW / 2, -10, padW, padH, 3);
-          ctx.roundRect(spread - padW / 2, -10, padW, padH, 3);
+          ctx.ellipse(0, 15, goalie.isButterfly ? 40 : 35, 23, 0, 0, Math.PI * 2);
           ctx.fill();
-          ctx.stroke();
 
-          ctx.fillStyle = '#0284c7';
-          ctx.fillRect(-spread - padW / 2, -2, padW, 4);
-          ctx.fillRect(spread - padW / 2, -2, padW, 4);
+          // The stick extends ahead of the goalie and is drawn under the gloves.
+          ctx.strokeStyle = colors.wood;
+          ctx.lineWidth = 4.6;
+          ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(24, 7); ctx.lineTo(38, -39); ctx.stroke();
+          ctx.strokeStyle = colors.blade;
+          ctx.lineWidth = 6;
+          ctx.beginPath(); ctx.moveTo(38, -39); ctx.lineTo(20, -42); ctx.stroke();
 
-          ctx.fillStyle = '#f59e0b';
-          ctx.strokeStyle = '#78350f';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.roundRect(-22, -16, 44, 5, 2);
-          ctx.fill();
-          ctx.stroke();
+          // Skates and leg pads; pads spread when the goalie drops to butterfly.
+          for (const side of [-1, 1]) {
+            const padX = side * spread;
+            ctx.fillStyle = colors.dark;
+            ctx.beginPath();
+            ctx.roundRect(padX - 6, 32, 12, 14, 4);
+            ctx.fill();
 
-          ctx.fillStyle = '#0f172a';
-          ctx.strokeStyle = '#38bdf8';
+            ctx.fillStyle = colors.shell;
+            ctx.strokeStyle = colors.edge;
+            ctx.lineWidth = 1.7;
+            ctx.beginPath();
+            ctx.roundRect(padX - 10, 6, 20, 32, 5);
+            ctx.fill(); ctx.stroke();
+            ctx.fillStyle = colors.stripe;
+            ctx.fillRect(padX - 8, 15, 16, 4.2);
+            ctx.fillRect(padX - 8, 29, 16, 3.4);
+            ctx.strokeStyle = '#b8cbd2';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padX - 7, 23); ctx.lineTo(padX + 7, 23);
+            ctx.stroke();
+          }
+
+          // Protective shoulders and a coherent jersey / chest shape.
+          ctx.fillStyle = colors.shell;
+          ctx.strokeStyle = colors.edge;
           ctx.lineWidth = 1.8;
           ctx.beginPath();
-          ctx.ellipse(0, 0, 21, 12, 0, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
+          ctx.roundRect(-27, -14, 16, 23, 7);
+          ctx.roundRect(11, -14, 16, 23, 7);
+          ctx.fill(); ctx.stroke();
 
-          ctx.fillStyle = '#f8fafc';
-          ctx.strokeStyle = '#0284c7';
-          ctx.lineWidth = 1.5;
-          ctx.fillRect(20, -10, 8, 16);
-          ctx.strokeRect(20, -10, 8, 16);
+          ctx.fillStyle = colors.jersey;
+          ctx.strokeStyle = '#183743';
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.roundRect(-19, -17, 38, 36, 10);
+          ctx.fill(); ctx.stroke();
+          ctx.fillStyle = colors.stripe;
+          ctx.fillRect(-14, 7, 28, 4);
+          ctx.fillStyle = '#e8f5f6';
+          ctx.font = '600 12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('30', 0, -3);
 
+          // Glove and blocker: asymmetry helps this read as a goalie, not a robot.
+          ctx.fillStyle = colors.shell;
+          ctx.strokeStyle = colors.edge;
+          ctx.lineWidth = 1.8;
           ctx.beginPath();
-          ctx.arc(-25, -4, 7.5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
+          ctx.ellipse(-30, 2, 11, 13, -0.2, 0, Math.PI * 2);
+          ctx.fill(); ctx.stroke();
+          ctx.fillStyle = '#d5e5e8';
+          ctx.beginPath(); ctx.ellipse(-30, 2, 5, 7, -0.2, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = colors.shell;
+          ctx.beginPath(); ctx.roundRect(23, -4, 14, 22, 3); ctx.fill(); ctx.stroke();
+          ctx.strokeStyle = colors.stripe;
+          ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(26, 5); ctx.lineTo(34, 5); ctx.stroke();
 
-          ctx.fillStyle = '#f8fafc';
+          // Helmet with visible cage lines and darker face opening.
+          ctx.fillStyle = colors.shell;
+          ctx.strokeStyle = colors.edge;
+          ctx.lineWidth = 1.9;
+          ctx.beginPath(); ctx.ellipse(0, -26, 13.5, 15.5, 0, 0, Math.PI * 2);
+          ctx.fill(); ctx.stroke();
+          ctx.fillStyle = colors.dark;
+          ctx.beginPath(); ctx.ellipse(0, -26, 9.5, 10.5, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = '#e9f4f5';
+          ctx.lineWidth = 1.4;
           ctx.beginPath();
-          ctx.arc(0, -2, 7.5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.strokeStyle = '#475569';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(-4, -4); ctx.lineTo(4, -4);
-          ctx.moveTo(0, -7); ctx.lineTo(0, 1);
+          ctx.moveTo(-8, -31); ctx.lineTo(8, -31);
+          ctx.moveTo(-9, -26); ctx.lineTo(9, -26);
+          ctx.moveTo(-7, -21); ctx.lineTo(7, -21);
+          ctx.moveTo(-3, -36); ctx.lineTo(-3, -16);
+          ctx.moveTo(3, -36); ctx.lineTo(3, -16);
           ctx.stroke();
 
           ctx.restore();
@@ -1216,46 +941,46 @@
           const hudY = 58;
           const r = 34;
 
-          ctx.fillStyle = 'rgba(2, 6, 23, 0.82)';
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+          ctx.fillStyle = 'rgba(244, 249, 251, 0.90)';
+          ctx.strokeStyle = 'rgba(91, 117, 126, 0.55)';
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.roundRect(hudX - 48, hudY - 44, 96, 108, 6);
           ctx.fill();
           ctx.stroke();
 
-          ctx.strokeStyle = '#334155';
+          ctx.strokeStyle = 'rgba(96, 118, 127, 0.8)';
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(hudX, hudY, r, 0, Math.PI * 2);
           ctx.stroke();
 
-          ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+          ctx.strokeStyle = 'rgba(121, 144, 152, 0.38)';
           ctx.beginPath();
           ctx.moveTo(hudX - r, hudY); ctx.lineTo(hudX + r, hudY);
-          ctx.moveTo(hudX, hudY - r); ctx.lineTo(hudX + r, hudY);
+          ctx.moveTo(hudX, hudY - r); ctx.lineTo(hudX, hudY + r);
           ctx.stroke();
 
           const sx = hudX + goalie.stickLX * (r - 6);
           const sy = hudY + goalie.stickLY * (r - 6);
 
-          ctx.strokeStyle = '#38bdf8';
+          ctx.strokeStyle = '#2f6c7d';
           ctx.lineWidth = 2;
           ctx.beginPath();
           ctx.moveTo(hudX, hudY);
           ctx.lineTo(sx, sy);
           ctx.stroke();
 
-          ctx.fillStyle = '#38bdf8';
+          ctx.fillStyle = '#2f6c7d';
           ctx.beginPath();
           ctx.arc(sx, sy, 5, 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.fillStyle = '#94a3b8';
+          ctx.fillStyle = '#4a646d';
           ctx.font = 'bold 9px ui-monospace, SFMono-Regular, Menlo, monospace';
           ctx.textAlign = 'center';
           ctx.fillText('VIRTUAL HID L-STICK', hudX, hudY - 30);
-          ctx.fillStyle = '#e2e8f0';
+          ctx.fillStyle = '#18333d';
           ctx.fillText(`X:${goalie.stickLX.toFixed(2)} Y:${goalie.stickLY.toFixed(2)}`, hudX, hudY + r + 15);
           ctx.textAlign = 'left';
         }
@@ -1276,7 +1001,7 @@
 
           for (let i = 0; i < puckTrail.length; i++) {
             const alpha = ((i + 1) / puckTrail.length) * 0.35;
-            ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+            ctx.fillStyle = `rgba(47, 112, 135, ${alpha})`;
             ctx.beginPath();
             ctx.arc(puckTrail[i].x, puckTrail[i].y, puck.radius * 0.72, 0, Math.PI * 2);
             ctx.fill();
@@ -1284,15 +1009,16 @@
 
           drawGoalie(goalie.x, goalie.y, goalie.angle);
 
-          ctx.fillStyle = '#090d16';
+          ctx.fillStyle = '#172b33';
           ctx.beginPath();
-          ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
+          ctx.arc(puck.x, puck.y, puck.radius + 1, 0, Math.PI * 2);
           ctx.fill();
-          ctx.strokeStyle = '#38bdf8';
+          ctx.strokeStyle = '#34798b';
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          drawVirtualStickHUD();
+          // On phones, report stick values in legible HTML below the canvas.
+          if (canvas.clientWidth > 500) drawVirtualStickHUD();
         }
 
         if (shootBtn) {
@@ -1324,15 +1050,17 @@
           e.preventDefault();
           const rect = canvas.getBoundingClientRect();
           const touch = e.touches[0];
-          const clickX = (touch.clientX - rect.left) * (W / rect.width);
-          const clickY = (touch.clientY - rect.top) * (H / rect.height);
-          shootPuck(clickX, clickY);
+          if (!touch) return;
+          hoverPos.x = (touch.clientX - rect.left) * (W / rect.width);
+          hoverPos.y = (touch.clientY - rect.top) * (H / rect.height);
+          hoverPos.active = true;
         }, { passive: false });
 
         canvas.addEventListener('touchmove', (e) => {
           e.preventDefault();
           const rect = canvas.getBoundingClientRect();
           const touch = e.touches[0];
+          if (!touch) return;
           hoverPos.x = (touch.clientX - rect.left) * (W / rect.width);
           hoverPos.y = (touch.clientY - rect.top) * (H / rect.height);
           hoverPos.active = true;
@@ -1340,9 +1068,18 @@
 
         canvas.addEventListener('touchend', (e) => {
           e.preventDefault();
+          const touch = e.changedTouches[0];
           hoverPos.active = false;
-          shootPuck();
+          if (!touch) return;
+          const rect = canvas.getBoundingClientRect();
+          const clickX = (touch.clientX - rect.left) * (W / rect.width);
+          const clickY = (touch.clientY - rect.top) * (H / rect.height);
+          shootPuck(clickX, clickY);
         }, { passive: false });
+
+        canvas.addEventListener('touchcancel', () => {
+          hoverPos.active = false;
+        });
 
         if (autoFireToggle) {
           autoFireToggle.addEventListener('change', (e) => {
